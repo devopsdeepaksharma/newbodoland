@@ -27,8 +27,36 @@
                     <p>Dashboard</p>
                 </a>
               </li>
-          <!-- Role and Permission -->
+@role('CSO')
+<li class="nav-header">Projects</li>
 
+<li class="nav-item">
+  <a href="#" class="nav-link">
+    <i class="nav-icon fas fa-list"></i>
+    <p>
+       Projects
+      <i class="fas fa-angle-left right"></i>
+    </p>
+  </a>
+  <ul class="nav nav-treeview">
+    
+    <li class="nav-item">
+      <a href="{{route('cso.projectlist')}}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Assigned Project</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{route('cso.approvedprojectdetail')}}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Approved Project</p>
+      </a>
+    </li>
+  </ul>
+</li>
+@endrole
+          <!-- Role and Permission -->
+          @role('Admin')
            <!-- Second -->
            <li class="nav-header">Role & Permission</li>
           
@@ -57,7 +85,7 @@
                   <p>Projects</p>
               </a>
             </li>
-
+            @endrole
             <!-- Setting -->
           <li class="nav-header">Setting</li>
           <li class="nav-item">
