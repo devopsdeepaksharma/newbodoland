@@ -20,8 +20,8 @@
 
 <section class="content">
     <div class="container-fluid">
-        <form name="projectstore" id="projectstore" action="post" action="{{route('storeprojectdetail')}}" enctype='multipart/form-data'>
-            @csrf
+        <form  method="POST" action="{{ route('cso.storeprojectdetail') }}" enctype='multipart/form-data'>
+            @csrf  
         <div class="row">
             <div class="col-12">
                 <div class="card card-info">
@@ -76,20 +76,20 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">HR : <span style="color:red;"> * </span></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="INR">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="₹ 0.00">
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Admin : <span style="color:red;"> * </span></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="INR">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="₹ 0.00">
                                 </div>
                             </div>
 
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Program : <span style="color:red;"> * </span></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="INR">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="₹ 0.00">
                                 </div>
                             </div>
                         </div>

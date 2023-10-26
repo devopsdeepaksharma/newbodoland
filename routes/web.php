@@ -48,7 +48,7 @@ Route::resource('permissions', PermissionController::class);
 Route::get('cso/projectlist',[CSOProjectController::class, 'index'])->name('cso.projectlist');
 Route::get('cso/createprojectdetail',[CSOProjectController::class, 'createprojectdetail'])->name('cso.createprojectdetail');
 Route::get('cso/approvedprojectdetail',[CSOProjectController::class, 'approvedprojectdetail'])->name('cso.approvedprojectdetail');
-Route::post('storeprojectdetail',[CSOProjectController::class, 'storeprojectdetail'])->name('storeprojectdetail');
+Route::post('cso/storeprojectdetail',[CSOProjectController::class, 'storeprojectdetail'])->name('cso.storeprojectdetail');
 
 Route::get('/csoregistration',[CsoregistrationController::class, 'index'])->name('csoregistration');
 Route::post('/getcsoregistration',[CsoregistrationController::class, 'store'])->name('getcsoregistration');
