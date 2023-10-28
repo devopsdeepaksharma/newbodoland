@@ -36,30 +36,44 @@
                     <th>Project Title</th>
                     <th>Location</th>
                     <th>Duration</th>
-                    <th>Description</th>
+                    <th >Description</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
+                  
+                  @foreach($getSmpuProjectDetails as $gccpd)
+     
                   <tr>
                     <td>1</td>
-                    <td>Save Water</td>
-                    <td>Assam</td>
-                    <td>6 Months</td>
-                    <td>This project purpose to save water...</td>
-                    <!-- <td><i class="fa fa-edit">Create Project Detail</i></td> -->
-                    <!-- <td><a href="{{ route('cso.createprojectdetail') }}"><button class="btn btn-warning btn-sm">Create Project Detail</button></a></td> -->
+                    <td>{{$gccpd->title}}</td>
+                    <td>{{$gccpd->location}}</td>
+                    <td>{{$gccpd->duration}} Months</td>
+                    <td style="width:50%">{{$gccpd->description}}</td>
+                   
                     <td>
-                    <a href="{{ route('cso.createprojectdetail') }}">
-                    <div class="btn-group w-100">
+                      
+                    
+                     
+                     @if($gccpd->cso_create_project_status == 1)
+                     
+                        <div class="btn-group w-100">
+                        <span class="btn btn-info">
+                        <span>Pending for SMPU Approval</span>
+                      </span>
+                      </div>
+                      @else
+                      <a href="{{ route('cso.createprojectdetail', ['pro_id' => $gccpd->project_id, 'user_id' => $gccpd->user_id])}}">
+                        <div class="btn-group w-100">
                         <span class="btn btn-warning col fileinput-button dz-clickable">
-                          <i class="fas fa-plus"></i>
+                          
                         <span>Create Project</span></span>
                       </div>
-                    </a>
-                        
+                      </a>
+                      @endif 
                     </td>
                   </tr>
+                  @endforeach
                   
                   
                   </tbody>

@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\CsoregistrationController;
 use App\Http\Controllers\CSOProjectController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\DownloadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,10 +44,21 @@ Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
 Route::resource('products', ProductController::class);
 Route::resource('permissions', PermissionController::class);
+Route::post('users/changeStatus', [UserController::class, 'changeStatus'])->name('users.changeStatus');
 
+
+Route::get('/download/{file?}/', [DownloadController::class, 'download'])->name('file.download');
+Route::get('/downloadTACetificate/{file?}', [DownloadController::class, 'downloadTACetificate'])->name('file.downloadTACetificate');
+Route::get('/downloadFCRACetificate/{file?}', [DownloadController::class, 'downloadFCRACetificate'])->name('file.downloadFCRACetificate');
+Route::get('/downloadAuditReport1/{file?}', [DownloadController::class, 'downloadAuditReport1'])->name('file.downloadAuditReport1');
+Route::get('/downloadAuditReport2/{file?}', [DownloadController::class, 'downloadAuditReport2'])->name('file.downloadAuditReport2');
+Route::get('/downloadAuditReport3/{file?}', [DownloadController::class, 'downloadAuditReport3'])->name('file.downloadAuditReport3');
+Route::get('/downloadAnnualReport1/{file?}', [DownloadController::class, 'downloadAnnualReport1'])->name('file.downloadAnnualReport1');
+Route::get('/downloadAnnualReport2/{file?}', [DownloadController::class, 'downloadAnnualReport2'])->name('file.downloadAnnualReport2');
+Route::get('/downloadAnnualReport3/{file?}', [DownloadController::class, 'downloadAnnualReport3'])->name('file.downloadAnnualReport3');
 //cso
 Route::get('cso/projectlist',[CSOProjectController::class, 'index'])->name('cso.projectlist');
-Route::get('cso/createprojectdetail',[CSOProjectController::class, 'createprojectdetail'])->name('cso.createprojectdetail');
+Route::get('cso/createprojectdetail/{pro_id}/{user_id}', [CSOProjectController::class,'createprojectdetail'])->name('cso.createprojectdetail');
 Route::get('cso/approvedprojectdetail',[CSOProjectController::class, 'approvedprojectdetail'])->name('cso.approvedprojectdetail');
 Route::post('cso/storeprojectdetail',[CSOProjectController::class, 'storeprojectdetail'])->name('cso.storeprojectdetail');
 
