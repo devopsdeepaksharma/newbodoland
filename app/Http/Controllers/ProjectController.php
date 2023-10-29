@@ -50,14 +50,14 @@ class ProjectController extends Controller
                     'status' => $request->status,
                     
                 ]);
-                return "Saved";
             });
+            sweetalert()->addSuccess('Project Created!');
+            return redirect()->route('projects.index');
         }
         catch (\Throwable $e) {
-            return $e->getMessage();
+            sweetalert()->addSuccess('Exception Occured! Contact Admin');
+            return redirect()->route('projects.index');
         }
-        sweetalert()->addSuccess('Project Created!');
-        return redirect()->route('projects.index')->with('message','Project Created!');
     }
 
 
@@ -85,12 +85,14 @@ class ProjectController extends Controller
                 $project->status = $request->status;
                 $project->save();
             });
+
+            sweetalert()->addSuccess('Project Updated!');
+            return redirect()->route('projects.index');
         }
         catch (\Throwable $e) {
-            return $e->getMessage();
+            sweetalert()->addError('Exception Occured! Contact Admin');
+            return redirect()->route('projects.index');
         }
-        return redirect()->route('projects.index')->with('message','Project Updated!');
-
     }
 
     public function assignProject(Request $request)
@@ -103,7 +105,8 @@ class ProjectController extends Controller
                 ->exists();
         
         if($check) {
-            return back()->with('message','Something went wrong!');
+            sweetalert()->addError('Project already Linked!');
+            return back();
         } else {
             try {
                 DB::transaction(function () use ($projectId, $userId) {
@@ -116,11 +119,13 @@ class ProjectController extends Controller
                     $project = Project::find($projectId);
                     Mail::to($user->email)->send(new AssignProjectMail($project, $user));
                 });
+
+                sweetalert()->addSuccess('Project Linked!');
+                return back();
             } catch (\Throwable $e) {
-                return $e->getMessage();
+                sweetalert()->addError('Exception Occured! Contact Admin');
+                return back();
             }
-            
-            return back()->with('message','Project Linked!');
         }
     }
 
@@ -131,10 +136,12 @@ class ProjectController extends Controller
                 $project =  Project::find($id);
                 $project->delete();
             });
+            sweetalert()->addSuccess('Project Deleted!');
+            return back();
         } catch(\Throwable $e) {
-            return $e->getMessage();
+            sweetalert()->addError('Exception Occured! Contact Admin');
+            return back();
+            // return $e->getMessage();
         }
-
-        return back()->with('message','Project Deleted!');
     }
 }

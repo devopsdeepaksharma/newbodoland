@@ -67,7 +67,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['org_name'],
             'org_short_name' => $data['org_short_name'],
             'email' => $data['email'],
@@ -75,5 +75,12 @@ class RegisterController extends Controller
             'pan' => $data['pan'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // assign cso role to user
+        $userId = $user->id;
+        $getUser = User::find($userId);
+        $getUser->assignRole(['CSO']);
+        $getUser->save();
+        return $user;
     }
 }
