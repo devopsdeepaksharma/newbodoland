@@ -90,90 +90,90 @@ li {
                             @csrf
                             <!-- organisation name -->
                             <div class="input-group mb-3">
-                            <input id="org_name" type="text" class="form-control @error('org_name') is-invalid @enderror" name="org_name" value="{{ old('org_name') }}" required autocomplete="org_name" autofocus placeholder="Name of Organisation">
-                            @error('org_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
+                                <input id="org_name" type="text" class="form-control @error('org_name') is-invalid @enderror" name="org_name" value="{{ old('org_name') }}" required autocomplete="org_name" autofocus placeholder="Name of Organisation">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
                                     </div>
                                 </div>
+                                @error('org_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
                             <!-- organisation short name -->
                             <div class="input-group mb-3">
                             <input id="org_short_name" type="text" class="form-control @error('org_short_name') is-invalid @enderror" name="org_short_name" value="{{ old('org_short_name') }}" required autocomplete="org_short_name" autofocus placeholder="Short name of Organisation">
+                            <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
                             @error('org_short_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                        <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
                             </div>
 
                             <!-- email -->
                             <div class="input-group mb-3">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
                             @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
-                                        </div>
-                                    </div>
+                            @enderror
                             </div>
 
                     <!-- Mobile -->
                     <div class="input-group mb-3">
                     <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus  placeholder="Mobile">
-                    @error('mobile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
                     <div class="input-group-append">
                         <div class="input-group-text">
                         <span class="fas fa-phone"></span>
                         </div>
                     </div>
+                    @error('mobile')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
 
                     <!-- Pan Number -->
                     <div class="input-group mb-3">
                     <input id="pan" type="text" class="form-control @error('pan') is-invalid @enderror" name="pan" value="{{ old('pan') }}" required autocomplete="pan" autofocus  placeholder="Organisation Pan Number">
-                    @error('pan')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
                     <div class="input-group-append">
                         <div class="input-group-text">
                         <span class="fas fa-credit-card"></span>
                         </div>
                     </div>
+                    @error('pan')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
 
                     <!-- password  -->
                     <div class="input-group mb-3">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
                     <div class="input-group-append">
                         <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
+                            <span class="fas fa-lock"></span>
                         </div>
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
                     </div>
                     <!-- Retype Password -->
