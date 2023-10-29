@@ -69,9 +69,9 @@ li {
 }
   </style>
 </head>
-<body>
+<body style="background-color:#e9ecef;">
     
-    <div style="height:20px; clear:both;"></div>
+    <div style="height:35px; clear:both;"></div>
 
 <div class="container text-center">
 <div class="row">

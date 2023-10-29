@@ -132,10 +132,50 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="state">State <span style="color: red;">*</span> :  </label>
-                                       <input type="text" class="form-control form-control-sm @error('state') is-invalid @enderror" id="state" name="state" placeholder="State" value="{{ old('state') }}">
+                                       {{--<input type="text" class="form-control form-control-sm @error('state') is-invalid @enderror" id="state" name="state" placeholder="State" value="{{ old('state') }}">--}}
+                                       <select name="state" id="state" class="form-control form-control-sm @error('state') is-invalid @enderror">
+                                       <option value="">Select State</option>
+                                          <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                          <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                          <option value="Assam">Assam</option>
+                                          <option value="Bihar">Bihar</option>
+                                          <option value="Chandigarh">Chandigarh</option>
+                                          <option value="Chhattisgarh">Chhattisgarh</option>
+                                          <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                          <option value="Daman and Diu">Daman and Diu</option>
+                                          <option value="Delhi">Delhi</option>
+                                          <option value="Lakshadweep">Lakshadweep</option>
+                                          <option value="Puducherry">Puducherry</option>
+                                          <option value="Goa">Goa</option>
+                                          <option value="Gujarat">Gujarat</option>
+                                          <option value="Haryana">Haryana</option>
+                                          <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                          <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                          <option value="Jharkhand">Jharkhand</option>
+                                          <option value="Karnataka">Karnataka</option>
+                                          <option value="Kerala">Kerala</option>
+                                          <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                          <option value="Maharashtra">Maharashtra</option>
+                                          <option value="Manipur">Manipur</option>
+                                          <option value="Meghalaya">Meghalaya</option>
+                                          <option value="Mizoram">Mizoram</option>
+                                          <option value="Nagaland">Nagaland</option>
+                                          <option value="Odisha">Odisha</option>
+                                          <option value="Punjab">Punjab</option>
+                                          <option value="Rajasthan">Rajasthan</option>
+                                          <option value="Sikkim">Sikkim</option>
+                                          <option value="Tamil Nadu">Tamil Nadu</option>
+                                          <option value="Telangana">Telangana</option>
+                                          <option value="Tripura">Tripura</option>
+                                          <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                          <option value="Uttarakhand">Uttarakhand</option>
+                                          <option value="West Bengal">West Bengal</option>
+                                          </select>
                                        @if ($errors->has('state'))
                                           <span class="text-danger errorsize">{{ $errors->first('state') }}</span>
                                        @endif
+                                       
                                     </div>
                                  </div>
                                  <div class="col-md-4">
@@ -180,7 +220,13 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="modeOfRegistration">Mode of Registration <span style="color: red;">*</span> : </label>
-                                       <input type="text" class="form-control form-control-sm @error('modeOfRegistration') is-invalid @enderror" id="modeOfRegistration" name="modeOfRegistration" placeholder="Mode of Registration" value="{{ old('modeOfRegistration') }}">
+                                       {{--<input type="text" class="form-control form-control-sm @error('modeOfRegistration') is-invalid @enderror" id="modeOfRegistration" name="modeOfRegistration" placeholder="Mode of Registration" value="{{ old('modeOfRegistration') }}"> --}}
+                                       <select class="form-control form-control-sm @error('fcra_certificate_exists') is-invalid @enderror" name="fcra_certificate_exists" id="modeOfRegistration"  value="{{ old('modeOfRegistration') }}">
+                                          <option value=" ">Select Mode of Registartion</option>
+                                          <option value="online">Online</option>
+                                          
+                                       </select>
+                                       
                                        @if ($errors->has('modeOfRegistration'))
                                           <span class="text-danger errorsize">{{ $errors->first('modeOfRegistration') }}</span>
                                        @endif
@@ -207,7 +253,7 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="registrationCertificate">Upload Registration Certificate <span style="color: red;">*</span> :  </label>
-                                       <input type="file" class="form-control form-control-sm @error('registrationCertificate') is-invalid @enderror" id="registrationCertificate" name="registrationCertificate" placeholder="Upload Registration Certificate">
+                                       <input type="file"  class="form-control form-control-sm @error('registrationCertificate') is-invalid @enderror" id="registrationCertificate" name="registrationCertificate" placeholder="Upload Registration Certificate">
                                     </div>
                                     @if ($errors->has('registrationCertificate'))
                                           <span class="text-danger errorsize">{{ $errors->first('registrationCertificate') }}</span>
@@ -242,7 +288,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group">
-                                       <label for="darpan">Registered in NGO Darpan <span style="color: red;">*</span> :  </label>
+                                       <label for="darpan">Registered in NGO Darpan  :  </label>
                                        <!-- <input type="text" class="form-control form-control-sm @error('darpan') is-invalid @enderror" id="darpan" name="darpan" placeholder="Registered in NGO Darpan" value="{{ old('darpan') }}"> -->
                                        <select class="form-control form-control-sm @error('darpan') is-invalid @enderror" name="darpan" id="darpan" value="{{ old('darpan') }}">
                                           <option value="">Select Option</option>
@@ -256,7 +302,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group">
-                                       <label for="tanNumber">Tan No <span style="color: red;">*</span> :  </label>
+                                       <label for="tanNumber">Tan No  :  </label>
                                        <input type="text" class="form-control form-control-sm @error('tanNumber') is-invalid @enderror" id="tanNumber" name="tanNumber" placeholder="Tan No" value="{{ old('tanNumber') }}">
                                        @if ($errors->has('tanNumber'))
                                           <span class="text-danger errorsize">{{ $errors->first('tanNumber') }}</span>
@@ -274,6 +320,19 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group">
+                                       <label for="fcra_certificate_exists">Do you have FCRA <span style="color: red;">*</span> : </label>
+                                       <select class="form-control form-control-sm @error('fcra_certificate_exists') is-invalid @enderror" name="fcra_certificate_exists" id="mytest" onchange="showDiv(this)" value="{{ old('fcra_certificate_exists') }}">
+                                          <option value="no">No</option>
+                                          <option value="yes">Yes</option>
+                                          
+                                       </select>
+                                       @if ($errors->has('fcra_certificate_exists'))
+                                          <span class="text-danger errorsize">{{ $errors->first('fcra_certificate_exists') }}</span>
+                                       @endif
+                                    </div>
+                                 </div>
+                                 <div class="col-md-4" id="FCRA_Regitration_Number" style="display:none;">
+                                    <div class="form-group">
                                        <label for="fcraNumber">FCRA Registration Number <span style="color: red;">*</span> :  </label>
                                        <input type="text" class="form-control form-control-sm @error('fcraNumber') is-invalid @enderror" id="fcraNumber" name="fcraNumber" placeholder="FCRA Registration Number" value="{{ old('fcraNumber') }}">
                                        @if ($errors->has('fcraNumber'))
@@ -281,20 +340,8 @@
                                        @endif
                                     </div>
                                  </div>
-                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                       <label for="fcra_certificate_exists">Do you have FCRA <span style="color: red;">*</span> : </label>
-                                       <select class="form-control form-control-sm @error('fcra_certificate_exists') is-invalid @enderror" name="fcra_certificate_exists" id="fcra_certificate_exists" value="{{ old('fcra_certificate_exists') }}">
-                                          <option value="">Select Option</option>
-                                          <option value="yes">Yes</option>
-                                          <option value="no">No</option>
-                                       </select>
-                                       @if ($errors->has('fcra_certificate_exists'))
-                                          <span class="text-danger errorsize">{{ $errors->first('fcra_certificate_exists') }}</span>
-                                       @endif
-                                    </div>
-                                 </div>
-                                 <div class="col-md-4">
+                                 
+                                 <div class="col-md-4" id="FCRA_Renew_Date" style="display:none;">
                                     <div class="form-group">
                                        <label for="fcraRenewalDate">FCRA Renewal Date <span style="color: red;">*</span> :  </label>
                                        <input type="date" class="form-control form-control-sm @error('fcraRenewalDate') is-invalid @enderror" id="fcraRenewalDate" name="fcraRenewalDate" placeholder="FCRA Renewal Date" value="{{ old('fcraRenewalDate') }}">
@@ -303,7 +350,7 @@
                                        @endif
                                     </div>
                                  </div>
-                                 <div class="col-md-4">
+                                 <div class="col-md-4" id="FCRA_Upload_Docx" style="display:none;">
                                     <div class="form-group">
                                        <label for="fcraCertificatefile">Upload FCRA Certificate <span style="color: red;">*</span> :  </label>
                                        <input type="file" class="form-control form-control-sm @error('fcraCertificatefile') is-invalid @enderror" id="fcraCertificatefile" name="fcraCertificatefile">
@@ -403,9 +450,12 @@
                                 </div>
                                 <div class="col-md-4">
                                       <div class="form-group">
-                                        <label for="donor1">Donor 2 :  </label>
-                                        <input type="text" class="form-control form-control-sm" id="donor2" name="donor2" placeholder="Donor 2" value="{{ old('donor2') }}">
-                                      </div>
+                                        <label for="donor1">Donor 2 <span style="color: red;">*</span> :  </label>
+                                        <input type="text" class="form-control form-control-sm @error('donor2') is-invalid @enderror" id="donor2" name="donor2" placeholder="Donor 2" value="{{ old('donor2') }}">
+                                        @if ($errors->has('donor2'))
+                                             <span class="text-danger errorsize">{{ $errors->first('donor2') }}</span>
+                                          @endif
+                                       </div>
                                 </div>
                                 <div class="col-md-4">
                                       <div class="form-group">
@@ -431,7 +481,7 @@
                                 <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="budgetYear1">Budget Year 1 <span style="color: red;">*</span> :  </label>
-                                        <input type="text" class="form-control form-control-sm @error('donor1') is-invalid @enderror" id="budgetYear1" name="budgetYear1" value="{{ old('budgetYear1') }}" placeholder="Budget Year 1">
+                                        <input type="text" class="form-control form-control-sm @error('budgetYear1') is-invalid @enderror" id="budgetYear1" name="budgetYear1" value="{{ old('budgetYear1') }}" placeholder="Budget Year 1">
                                           @if ($errors->has('budgetYear1'))
                                              <span class="text-danger errorsize">{{ $errors->first('budgetYear1') }}</span>
                                           @endif
@@ -448,27 +498,39 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budgetYear2">Budget Year 2 :  </label>
-                                        <input type="text" class="form-control form-control-sm" id="budgetYear2" name="budgetYear2" value="{{ old('budgetYear2') }}" placeholder="Budget Year 2">
-                                      </div>
+                                        <label for="budgetYear2">Budget Year 2 <span style="color: red;">*</span> :  </label>
+                                        <input type="text" class="form-control form-control-sm @error('budgetYear2') is-invalid @enderror" id="budgetYear2" name="budgetYear2" value="{{ old('budgetYear2') }}" placeholder="Budget Year 2">
+                                        @if ($errors->has('budgetYear2'))
+                                             <span class="text-danger errorsize">{{ $errors->first('budgetYear2') }}</span>
+                                          @endif
+                                       </div>
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budget2">Budget 2 :  </label>
-                                        <input type="text" class="form-control form-control-sm" id="budget2" name="budget2" placeholder="Budget 2">
-                                      </div>
+                                        <label for="budget2">Budget 2 <span style="color: red;">*</span> :  </label>
+                                        <input type="text" class="form-control form-control-sm @error('budget2') is-invalid @enderror" id="budget2" name="budget2" placeholder="Budget 2">
+                                        @if ($errors->has('budget2'))
+                                             <span class="text-danger errorsize">{{ $errors->first('budget2') }}</span>
+                                          @endif
+                                       </div>
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budgetYear3">Budget Year 3 :  </label>
-                                        <input type="text" class="form-control form-control-sm" id="budgetYear3" name="budgetYear3" value="{{ old('budgetYear3') }}" placeholder="Budget Year 3">
-                                      </div>
+                                        <label for="budgetYear3">Budget Year 3 <span style="color: red;">*</span> :  </label>
+                                        <input type="text" class="form-control form-control-sm @error('budgetYear3') is-invalid @enderror" id="budgetYear3" name="budgetYear3" value="{{ old('budgetYear3') }}" placeholder="Budget Year 3">
+                                        @if ($errors->has('budgetYear3'))
+                                             <span class="text-danger errorsize">{{ $errors->first('budgetYear3') }}</span>
+                                          @endif
+                                       </div>
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budget3">Budget 3 :  </label>
-                                        <input type="text" class="form-control form-control-sm" id="budget3" name="budget3" placeholder="Budget 3">
-                                      </div>
+                                        <label for="budget3">Budget 3 <span style="color: red;">*</span> :  </label>
+                                        <input type="text" class="form-control form-control-sm @error('budget3') is-invalid @enderror" id="budget3" name="budget3" placeholder="Budget 3">
+                                        @if ($errors->has('budget3'))
+                                             <span class="text-danger errorsize">{{ $errors->first('budget3') }}</span>
+                                          @endif
+                                       </div>
                                 </div>
                               </div>
                            </div>
@@ -602,7 +664,7 @@
                                 <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="uploadAnnualReport3">Upload Annual Report 3 <span style="color: red;">*</span> :  </label>
-                                        <input type="file" class="form-control form-control-sm" id="uploadAnnualReport3" name="uploadAnnualReport3" placeholder="Upload Annual Report 3">
+                                        <input type="file" class="form-control form-control-sm @error('uploadAnnualReport3') is-invalid @enderror" id="uploadAnnualReport3" name="uploadAnnualReport3" placeholder="Upload Annual Report 3">
                                         @if ($errors->has('uploadAnnualReport3'))
                                              <span class="text-danger errorsize">{{ $errors->first('uploadAnnualReport3') }}</span>
                                           @endif
@@ -628,6 +690,19 @@
          </div>
       </div>
       <div style="height:10px; clear:both;"></div>
+      <script type="text/javascript">
+      function showDiv(select){
+         if(select.value=='yes'){
+            document.getElementById('FCRA_Renew_Date').style.display = "block";
+            document.getElementById('FCRA_Upload_Docx').style.display = "block";
+            document.getElementById('FCRA_Regitration_Number').style.display = "block";
+         } else{
+            document.getElementById('FCRA_Renew_Date').style.display = "none";
+            document.getElementById('FCRA_Upload_Docx').style.display = "none";
+            document.getElementById('FCRA_Regitration_Number').style.display = "none";
+         }
+      } 
+      </script>
       
       <!-- Main Footer -->
       <footer class="main-footer">
@@ -639,7 +714,8 @@
          <strong>Copyright &copy; 2023-2024 <a href="https://www.brlf.in/">BRLF</a>.</strong> All rights reserved.
       </footer>
    </body>
-   
+ 
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-
+   
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </html>

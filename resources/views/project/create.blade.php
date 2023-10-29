@@ -59,6 +59,25 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 mt-2">
+                                        <div class="form-group">
+                                            <label for="location">Location</label>
+                                            <input type="text" name="location" id="location" class="form-control" value="{{ old('location') }}" placeholder="Project Location" required>
+                                            @error('location')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <div class="form-group">
+                                            <label for="tenure">Tenure</label>
+                                            <input type="number" name="tenure" id="tenure" class="form-control" value="{{ old('tenure') }}" placeholder="Project Tenure" required>
+                                            @error('tenure')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mt-2">
                                         <label for="status">Project Status</label>
                                         <select name="status" id="status" class="form-control" required>
                                             <option value="">Select an Option</option>

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
     
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\UserProject;
 use Auth;
 use Spatie\Permission\Models\Role;
 use DB;
@@ -13,6 +11,17 @@ use Hash;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Mail;
+use App\Models\PartnerBasicDetails;
+use App\Models\RegistrationDetail;
+use App\Models\OrganisationProfile;
+use App\Models\BudgetInformation;
+use App\Models\MajorDonor;
+use App\Models\AnnualReport;
+use App\Models\UserProject;
+use App\Models\AuditReport;
+use App\Models\User;
+use App\Mail\approveApplicationMail;
     
 class UserController extends Controller
 {
@@ -80,7 +89,15 @@ class UserController extends Controller
     public function show($id): View
     {
         $user = User::find($id);
-        return view('users.show',compact('user'));
+        //dd($user);
+        $annualReport = AnnualReport::where('user_id', $id)->first();
+        $auditReport = AuditReport::where('user_id', $id)->first();
+        $budgetInformation = BudgetInformation::where('user_id', $id)->first();
+        $organisationProfile = OrganisationProfile::where('user_id', $id)->first();
+        $partnerBasicDetails = PartnerBasicDetails::where('user_id', $id)->first();
+        $registrationDetail = RegistrationDetail::where('user_id', $id)->first();
+        $majorDonor = MajorDonor::where('user_id', $id)->first();
+        return view('users.show',compact('user','majorDonor','registrationDetail','partnerBasicDetails','annualReport','auditReport','budgetInformation','organisationProfile'));
     }
     
     /**
@@ -145,5 +162,17 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
+    }
+
+
+    public function changeStatus(Request $request)
+    {
+        
+        $user = User::find($request->userId);
+        $user->status = $request->approval_status;
+        $user->save();
+        Mail::to($user->email)->send(new approveApplicationMail($user));
+        sweetalert()->addSuccess('Application status changed!');
+        return back();
     }
 }

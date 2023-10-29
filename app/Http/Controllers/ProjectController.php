@@ -28,9 +28,12 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
+       
         $validator = Validator::make($request->all(),[
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'location' => 'required|string',
+            'tenure' => 'required|max:5',
             'status' => 'required|in:0,1',
         ]);
         if($validator->fails()) {
@@ -42,7 +45,10 @@ class ProjectController extends Controller
                 Project::create([
                     'title' => $request->title,
                     'description' => $request->description,
+                    'location' => $request->location,
+                    'duration' => $request->tenure,
                     'status' => $request->status,
+                    
                 ]);
                 return "Saved";
             });
@@ -50,6 +56,7 @@ class ProjectController extends Controller
         catch (\Throwable $e) {
             return $e->getMessage();
         }
+        sweetalert()->addSuccess('Project Created!');
         return redirect()->route('projects.index')->with('message','Project Created!');
     }
 

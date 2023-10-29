@@ -58,16 +58,21 @@ class CsoregistrationController extends Controller
             'taCertificate' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
             'taRegistrationNo' => 'required',
             'pan' => ['required', 'string', new PanNumber],
-            'darpan' => ['required', 'max:50'],
-            'tanNumber' => ['required', 'max:50'],
+            //'darpan' => ['required', 'max:50'],
+            //'tanNumber' => ['required', 'max:50'],
             'egNumber' => ['required', 'max:50'],
             'fcraNumber' => ['required', 'max:50'],
             'fcra_certificate_exists' => 'required',
             'fcraRenewalDate' => 'required',
             'fcraCertificatefile' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
             'donor1' => ['required', 'max:50'],
+            'donor2' => ['required', 'max:50'],
             'budgetYear1' => ['required', 'max:20'],
             'budget1' => ['required', 'max:20'],
+            'budgetYear2' => ['required', 'max:20'],
+            'budget2' => ['required', 'max:20'],
+            'budgetYear3' => ['required', 'max:20'],
+            'budget3' => ['required', 'max:20'],
             'auditReportYear1' => 'required',
             'uploadAuditReport1' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
             'auditReportYear2' => 'required',
@@ -94,8 +99,8 @@ class CsoregistrationController extends Controller
             'registrationNumber.required' => 'Registartion Number is required',
             'taRegistrationNo.required' => '12A Registartion Number is required',
             'pan.required' => 'Please enter valid PAN Number',
-            'darpan.required' => 'NGO Darpan Number is required',
-            'tanNumber.required' => 'Tan Number is required',
+            //'darpan.required' => 'NGO Darpan Number is required',
+            //'tanNumber.required' => 'Tan Number is required',
             'egNumber.required' => '80G Number is required',
             'fcraNumber.required' => 'FCRA Number is required',
             'fcra_certificate_exists.required' => 'This Field is required',
@@ -125,7 +130,7 @@ class CsoregistrationController extends Controller
         $partnerBasicDetails->org_pincode = $request->pincode;
         $partnerBasicDetails->user_id = $userId;
         $partnerBasicDetails->created_by = $userId;
-        $partnerBasicDetails->save();
+        //$partnerBasicDetails->save();
         
         //Insert Registartion Details
         $partnerRegistrationDetails = new RegistrationDetail();
@@ -164,7 +169,7 @@ class CsoregistrationController extends Controller
         $partnerRegistrationDetails->fcra_certificate = $FCRAFileName;
        
         $partnerRegistrationDetails->user_id = $userId;
-        $partnerRegistrationDetails->save();
+        //$partnerRegistrationDetails->save();
 
         //Insert Orgnisation Profile
         $partnerOrganisationDetail = new OrganisationProfile();
@@ -173,7 +178,7 @@ class CsoregistrationController extends Controller
         $partnerOrganisationDetail->flagship = $request->flagship;
         $partnerOrganisationDetail->focus_on_women = $request->women;
         $partnerOrganisationDetail->user_id = $userId;
-        $partnerOrganisationDetail->save();
+        //$partnerOrganisationDetail->save();
 
         //Insert Major Donor
         $partnerMajorDonor = new MajorDonor();
@@ -181,7 +186,7 @@ class CsoregistrationController extends Controller
         $partnerMajorDonor->donor2 = $request->donor2;
         $partnerMajorDonor->donor3 = $request->donor3;
         $partnerMajorDonor->user_id = $userId;
-        $partnerMajorDonor->save();
+        //$partnerMajorDonor->save();
 
         //Insert budget Information
         $partnerBudgetInformation =  new BudgetInformation();
@@ -192,7 +197,7 @@ class CsoregistrationController extends Controller
         $partnerBudgetInformation->budget_year3 = $request->budgetYear3;
         $partnerBudgetInformation->budget3 = $request->budget3;
         $partnerBudgetInformation->user_id = $userId;
-        $partnerBudgetInformation->save();
+        //$partnerBudgetInformation->save();
 
         //Insert Audit Report
         $partnerAuditReport =  new AuditReport();
@@ -221,7 +226,7 @@ class CsoregistrationController extends Controller
         }
         $partnerAuditReport->audit_report3 = $uploadAuditReport3FileName;
         $partnerAuditReport->user_id = $userId;
-        $partnerAuditReport->save();
+        //$partnerAuditReport->save();
 
         //Insert Annual Report
         $partnetAnnualReport =  new AnnualReport();
@@ -250,7 +255,7 @@ class CsoregistrationController extends Controller
         }
         $partnetAnnualReport->annual_report3 = $uploadAnnualReport3FileName;
         $partnetAnnualReport->user_id = $userId;
-        $partnetAnnualReport->save();
+        //$partnetAnnualReport->save();
 
         
         
@@ -268,7 +273,7 @@ class CsoregistrationController extends Controller
             $updateUserRegistrationStatus = User::where('id',$userId)->first();
             $updateUserRegistrationStatus->registration_complete = 1;
             $updateUserRegistrationStatus->status = 'P';
-            $updateUserRegistrationStatus->save();
+            //$updateUserRegistrationStatus->save();
 
             // Below Mail will be send to User and Admin
 

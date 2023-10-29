@@ -49,7 +49,7 @@
                                     <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $item->title }}</td>
-                                        <td>{{ $item->description }}</td>
+                                        <td style="width:50%">{{ $item->description }}</td>
                                         <td>
                                             @if($item->status == 1)
                                                 <span class="badge badge-success">Active</span>
@@ -62,7 +62,7 @@
                                                 <button class="btn btn-success mx-1"><i class="nav-icon fas fa-edit"></i> Edit</button>
                                             </a>
                                             <a href="{{ route('project.delete', ['id'=>$item->id]) }}">
-                                                <button class="btn btn-danger mx-1"><i class="nav-icon fas fa-trash"></i> Delete</button>
+                                                <button class="btn btn-danger mx-1" onclick="return confirmDelete()"><i class="nav-icon fas fa-trash"></i> Delete</button>
                                             </a>
                                         </td>                                
                                     </tr>
@@ -85,4 +85,12 @@
     <!-- /.content -->
 </div>
 
+@endsection
+@section('scripts')
+<script>
+  function confirmDelete()
+  {
+    return confirm("Are you sure you want to delete this user?");
+  }
+</script>
 @endsection

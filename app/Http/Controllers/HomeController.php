@@ -36,8 +36,8 @@ class HomeController extends Controller
 
         
         $getUserId = Auth::User()->id;
-        // $user = Auth::user();
-        // $roles = $user->getRoleNames();
+        $user = Auth::user();
+        $roles = $user->getRoleNames();
         // dd($roles);
        
         $getUserData = User::where('id',$getUserId)->first();
@@ -53,13 +53,27 @@ class HomeController extends Controller
         //dd($basicDetailTableCheck,$registrationTableCheck,$organisationTableCheck,$majorDonorTableCheck,$budgetInfoTableCheck,$auditReportTableCheck,$annualReportTableCheck);
        
         //dd($basicDetailTableCheck == null && $registrationTableCheck == null &&  $organisationTableCheck == null && $majorDonorTableCheck == null && $budgetInfoTableCheck == null && $auditReportTableCheck==null && $annualReportTableCheck==null);
+        //dd($getUserData->registration_complete == 1 && $getUserData->status == 'A');
+        //echo auth()->user()->getRoleNames();
+        //die();
         if($getUserData->registration_complete == 0 && $getUserData->status == 'P')
         {
+            return view('cso.csoregistration', compact('getUserData'));
+        }
+        elseif($getUserData->registration_complete == 0 && $getUserData->status == 'A')
+        {
+            
+            dd($user->hasRole('admin'));
             return view('cso.csoregistration', compact('getUserData'));
         }
         elseif($getUserData->registration_complete == 1 && $getUserData->status == 'P')
         {
             return view('cso.afterregistration', compact('getUserData'));
+        }
+        elseif($getUserData->registration_complete == 1 && $getUserData->status == 'A')
+        {
+            
+            return view('admin.dashboard');
         }
         else
         {
