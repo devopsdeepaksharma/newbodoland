@@ -151,7 +151,7 @@
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label for="state">State <span style="color: red;">*</span> :  </label>
-                                    <input readonly type="text" class="form-control form-control-sm" id="state" name="state" placeholder="State" value="{{ isset($partnerBasicDetails) ?  $partnerBasicDetails->org_state : '' }}">
+                                    <input readonly type="text" class="form-control form-control-sm" id="state" name="state" placeholder="State" value="{{ isset($partnerBasicDetails) ?  \App\Models\State::find($partnerBasicDetails->org_state)->name : '' }}">
                                  </div>
                               </div>
                               <div class="col-md-4">
