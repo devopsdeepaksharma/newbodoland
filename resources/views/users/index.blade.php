@@ -101,10 +101,10 @@
                           </td>
                           <td>
                             <a href="{{ route('users.show',$user->id) }}" >
-                              <button class="btn btn-info btn-sm" >Show</button>
+                              <button class="btn btn-info btn-sm" @if($user->registration_complete == 0) disabled @endif>Show</button>
                             </a>
                             <a href="{{ route('users.edit',$user->id) }}">
-                              <button class="btn btn-primary btn-sm"  >Edit</button>
+                              <button class="btn btn-primary btn-sm"@if($user->registration_complete == 0) disabled @endif >Edit</button>
                             </a>
                             {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline', 'onsubmit' => 'return confirmDelete()']) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
