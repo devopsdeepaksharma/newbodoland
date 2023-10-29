@@ -20,9 +20,12 @@
                 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
                <a href="#" class="navbar-brand">
-               <img src="{{asset('admin-assets/img/logo/logo1.png')}}" alt="AdminLTE Logo"  style="width:40%; height:auto;">
+                <img src="{{asset('admin-assets/img/logo/logo1.png')}}" alt="AdminLTE Logo"  style="width:40%; height:auto;">
                </a>
-              
+               <form action="{{ route('logout') }}" method="post">
+                @csrf
+                    <input type="submit" value="Logout" class="btn-primary btn btn-sm">
+                </form>
             </div>
          </nav>
          <!-- /.navbar -->

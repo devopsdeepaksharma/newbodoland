@@ -135,42 +135,9 @@
                                        {{--<input type="text" class="form-control form-control-sm @error('state') is-invalid @enderror" id="state" name="state" placeholder="State" value="{{ old('state') }}">--}}
                                        <select name="state" id="state" class="form-control form-control-sm @error('state') is-invalid @enderror">
                                        <option value="">Select State</option>
-                                          <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                          <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                          <option value="Assam">Assam</option>
-                                          <option value="Bihar">Bihar</option>
-                                          <option value="Chandigarh">Chandigarh</option>
-                                          <option value="Chhattisgarh">Chhattisgarh</option>
-                                          <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                                          <option value="Daman and Diu">Daman and Diu</option>
-                                          <option value="Delhi">Delhi</option>
-                                          <option value="Lakshadweep">Lakshadweep</option>
-                                          <option value="Puducherry">Puducherry</option>
-                                          <option value="Goa">Goa</option>
-                                          <option value="Gujarat">Gujarat</option>
-                                          <option value="Haryana">Haryana</option>
-                                          <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                          <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                          <option value="Jharkhand">Jharkhand</option>
-                                          <option value="Karnataka">Karnataka</option>
-                                          <option value="Kerala">Kerala</option>
-                                          <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                          <option value="Maharashtra">Maharashtra</option>
-                                          <option value="Manipur">Manipur</option>
-                                          <option value="Meghalaya">Meghalaya</option>
-                                          <option value="Mizoram">Mizoram</option>
-                                          <option value="Nagaland">Nagaland</option>
-                                          <option value="Odisha">Odisha</option>
-                                          <option value="Punjab">Punjab</option>
-                                          <option value="Rajasthan">Rajasthan</option>
-                                          <option value="Sikkim">Sikkim</option>
-                                          <option value="Tamil Nadu">Tamil Nadu</option>
-                                          <option value="Telangana">Telangana</option>
-                                          <option value="Tripura">Tripura</option>
-                                          <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                          <option value="Uttarakhand">Uttarakhand</option>
-                                          <option value="West Bengal">West Bengal</option>
+                                          @foreach (\App\Models\State::all() as $item)
+                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                          @endforeach
                                           </select>
                                        @if ($errors->has('state'))
                                           <span class="text-danger errorsize">{{ $errors->first('state') }}</span>
@@ -494,7 +461,7 @@
                                 <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="budget1">Budget 1 <span style="color: red;">*</span> :  </label>
-                                        <input type="text" class="form-control form-control-sm @error('budget1') is-invalid @enderror" id="budget1" name="budget1" placeholder="Budget 1">
+                                        <input type="text" class="form-control form-control-sm @error('budget1') is-invalid @enderror" id="budget1" name="budget1" placeholder="Budget 1" value="{{ old('budget1') }}">
                                         @if ($errors->has('budget1'))
                                              <span class="text-danger errorsize">{{ $errors->first('budget1') }}</span>
                                           @endif
@@ -515,7 +482,7 @@
                                 <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="budget2">Budget 2 <span style="color: red;">*</span> :  </label>
-                                        <input type="text" class="form-control form-control-sm @error('budget2') is-invalid @enderror" id="budget2" name="budget2" placeholder="Budget 2">
+                                        <input type="text" class="form-control form-control-sm @error('budget2') is-invalid @enderror" id="budget2" name="budget2" placeholder="Budget 2" value="{{ old('budget2') }}">
                                         @if ($errors->has('budget2'))
                                              <span class="text-danger errorsize">{{ $errors->first('budget2') }}</span>
                                           @endif
@@ -536,7 +503,7 @@
                                 <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="budget3">Budget 3 <span style="color: red;">*</span> :  </label>
-                                        <input type="text" class="form-control form-control-sm @error('budget3') is-invalid @enderror" id="budget3" name="budget3" placeholder="Budget 3">
+                                        <input type="text" class="form-control form-control-sm @error('budget3') is-invalid @enderror" id="budget3" name="budget3" placeholder="Budget 3" value="{{ old('budget3') }}">
                                         @if ($errors->has('budget3'))
                                              <span class="text-danger errorsize">{{ $errors->first('budget3') }}</span>
                                           @endif
