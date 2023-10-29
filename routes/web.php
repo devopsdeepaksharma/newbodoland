@@ -32,7 +32,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 
-
+Route::get('mail/send', [MailController::class, 'send'])->name('mail.send');
 
 
   

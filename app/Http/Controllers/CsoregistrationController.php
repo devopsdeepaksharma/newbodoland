@@ -22,6 +22,7 @@ use App\Models\BudgetInformation;
 use App\Models\AuditReport;
 use App\Models\AnnualReport;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Mail\csoFinalRegistraionFormSubmit;
 
 class CsoregistrationController extends Controller
 {
@@ -29,10 +30,12 @@ class CsoregistrationController extends Controller
 
     public function index(Request $request)
     {
-       
+        $currentYear = date("Y");
+        $lastCurrentYear = $currentYear - 1;
+        $secondLastCurrentYear = $lastCurrentYear - 1;
         $userRegisterEmailId = Auth::user()->email;
         $userPanNumabr = Auth::user()->pan;
-        return view('cso.csoregistrationform', compact(['userRegisterEmailId','userPanNumabr']));
+        return view('cso.csoregistrationform', compact(['userRegisterEmailId','userPanNumabr', 'currentYear', 'lastCurrentYear', 'secondLastCurrentYear']));
     }
 
     
@@ -61,10 +64,10 @@ class CsoregistrationController extends Controller
             //'darpan' => ['required', 'max:50'],
             //'tanNumber' => ['required', 'max:50'],
             'egNumber' => ['required', 'max:50'],
-            'fcraNumber' => ['required', 'max:50'],
             'fcra_certificate_exists' => 'required',
-            'fcraRenewalDate' => 'required',
-            'fcraCertificatefile' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'fcraNumber' => ['required_if:fcra_certificate_exists,==,yes', 'max:50'],
+            'fcraRenewalDate' => 'required_if:fcra_certificate_exists,==,yes',
+            'fcraCertificatefile' => 'required_if:fcra_certificate_exists,==,yes|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
             'donor1' => ['required', 'max:50'],
             'donor2' => ['required', 'max:50'],
             'budgetYear1' => ['required', 'max:20'],
@@ -278,7 +281,7 @@ class CsoregistrationController extends Controller
             // Below Mail will be send to User and Admin
 
         }
-
+        Mail::to($user->email)->send(new csoFinalRegistraionFormSubmit($user));
         sweetalert()->addSuccess('You have Successfully Registered with us!.');
         return redirect()->route('awatingforapproval');
         return back();
