@@ -30,9 +30,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): View
+    public function index(Request $request)
     {
-        $query = User::query();
+        $query = User::role('CSO')->with(['projects' => function($query){
+            $query->select('projects.id');
+        }]);
+        $query->role('CSO');
         if( $request->has('status') && $request->status == 'P') {
             $query->where('status', 'P');
         }
@@ -111,7 +114,7 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-        $projects = UserProject::where('user_id', Auth::user()->id)
+        $projects = UserProject::where('user_id', $id)
                     ->join('projects','projects.id', 'user_project.project_id')
                     ->get('projects.*');      
         return view('users.edit',compact('user','roles','userRole','projects'));
@@ -167,12 +170,20 @@ class UserController extends Controller
 
     public function changeStatus(Request $request)
     {
+        try {
+            DB::transaction(function () use ($request) {
+                $user = User::find($request->userId);
+                $user->status = $request->approval_status;
+                $user->save();
+            });
+            Mail::to($user->email)->send(new approveApplicationMail($user));
+            sweetalert()->addSuccess('Application status changed!');
+            return back();
+        } catch(\Exception $e) {
+            sweetalert()->addError('Some error occured!');
+            return back();
+        }
         
-        $user = User::find($request->userId);
-        $user->status = $request->approval_status;
-        $user->save();
-        Mail::to($user->email)->send(new approveApplicationMail($user));
-        sweetalert()->addSuccess('Application status changed!');
-        return back();
+        
     }
 }

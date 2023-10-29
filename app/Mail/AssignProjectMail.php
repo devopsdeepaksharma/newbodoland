@@ -35,7 +35,7 @@ class AssignProjectMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.assignProject')
+        return $this->view('mail.assignProject')
         ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
         ->subject('Project Assignment');
     }
