@@ -36,8 +36,8 @@ class HomeController extends Controller
 
         
         $getUserId = Auth::User()->id;
-        // $user = Auth::user();
-        // $roles = $user->getRoleNames();
+        $user = Auth::user();
+        $roles = $user->getRoleNames();
         // dd($roles);
        
         $getUserData = User::where('id',$getUserId)->first();
@@ -60,12 +60,19 @@ class HomeController extends Controller
         {
             return view('cso.csoregistration', compact('getUserData'));
         }
+        elseif($getUserData->registration_complete == 0 && $getUserData->status == 'A')
+        {
+            
+            dd($user->hasRole('admin'));
+            return view('cso.csoregistration', compact('getUserData'));
+        }
         elseif($getUserData->registration_complete == 1 && $getUserData->status == 'P')
         {
             return view('cso.afterregistration', compact('getUserData'));
         }
         elseif($getUserData->registration_complete == 1 && $getUserData->status == 'A')
         {
+            
             return view('admin.dashboard');
         }
         else

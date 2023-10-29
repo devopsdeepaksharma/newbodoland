@@ -30,5 +30,6 @@
 <!-- ./wrapper -->
 
 @include('adminlayouts.scripts')
+@yield('scripts')
 </body>
 </html>

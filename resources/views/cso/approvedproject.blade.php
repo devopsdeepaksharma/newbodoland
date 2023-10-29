@@ -8,10 +8,10 @@
             <h1>Projects</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <!-- <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Projects</li>
-            </ol>
+            </ol> -->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -29,8 +29,8 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <p><center>There is no any approved Project....</center></p>
-                <!-- <table id="example1" class="table table-bordered table-striped">
+                <p><center>There is no any approved Project from SMPU Side....</center></p>
+               {{-- <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>S.NO</th>
@@ -64,7 +64,7 @@
                   
                   </tbody>
                  
-                </table> -->
+                </table> --}}
               </div>
               <!-- /.card-body -->
             </div>

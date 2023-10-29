@@ -1,29 +1,53 @@
-@extends('layouts.app')
+@extends('adminlayouts.app')
 
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Permissions</h2>
-            </div>
-            <div class="pull-right">
-                @can('permission-create')
-                <a class="btn btn-success" href="{{ route('permissions.create') }}"> Create New Permission</a>
-                @endcan
-            </div>
-        </div>
-    </div>
 
-
-    @if ($message = Session::get('success'))
+@if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
     @endif
 
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Permissions</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Projects</li>
+            </ol>
+          </div>
+        </div>
+        <div class="pull-right">
+                @can('permission-create')
+                <a class="btn btn-success" href="{{ route('permissions.create') }}"> Create New Permission</a>
+                @endcan
+            </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
-    <table class="table table-bordered">
+
+ 
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12"> <div class="card-header">
+                      {{-- <a class="btn btn-success" style="float:right;" href="{{ route('users.create') }}"> Create New User</a> --}}
+                  </div>
+
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Registered CSO List</h3>
+              </div>
+              <!-- /.card-header -->
+              
+              <div class="card-body">
+              <table class="table table-bordered">
         <tr>
             <th>No</th>
             <th>Name</th>
@@ -53,10 +77,19 @@
 	    </tr>
 	    @endforeach
     </table>
+                {!! $permissions->links("pagination::bootstrap-4") !!}
 
+               
+              </div>
+             
+            </div>
+           
+          </div>
+         
+        </div>
+       
+      </div>
+     
+    </section>
 
-    {!! $permissions->links("pagination::bootstrap-4") !!}
-
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
