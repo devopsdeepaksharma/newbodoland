@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class State extends Model
 {
     use HasFactory;
+
+    /**
+     * Get all of the districts for the State
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function districts(): HasMany
+    {
+        return $this->hasMany(District::class);
+    }
 }
