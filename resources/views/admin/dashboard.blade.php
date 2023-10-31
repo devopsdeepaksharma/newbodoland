@@ -155,7 +155,10 @@
                                       <span class="info-box-icon bg-info"><i class="fa fa-home"></i></span>
                                       <div class="info-box-content">
                                           <span class="info-box-text" >Total Districts</span>
-                                          <span class="info-box-number">2</span>
+                                          @php
+                                            $districtCount = \App\Models\District::count();
+                                          @endphp
+                                          <span class="info-box-number">{{ $districtCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
                                   </div>
@@ -167,7 +170,10 @@
                                       <span class="info-box-icon bg-success"><i class="	fa fa-cube"></i></span>
                                       <div class="info-box-content">
                                           <span class="info-box-text">Total Blocks</span>
-                                          <span class="info-box-number">7</span>
+                                            @php
+                                            $blockCount = \App\Models\Block::count();
+                                            @endphp
+                                          <span class="info-box-number">{{ $blockCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
                                   </div>
@@ -179,7 +185,10 @@
                                       <span class="info-box-icon bg-warning"><i class="fas fa-dolly-flatbed"></i></span>
                                       <div class="info-box-content">
                                           <span class="info-box-text">Total VCDC</span>
-                                          <span class="info-box-number">53</span>
+                                          @php
+                                            $vcdcCount = \App\Models\VillageCouncilDevelopmentCommittee::count();
+                                          @endphp
+                                          <span class="info-box-number">{{ $vcdcCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
                                   </div>
@@ -191,7 +200,10 @@
                                       <span class="info-box-icon bg-danger"><i class="fa fa-map-pin"></i></span>
                                       <div class="info-box-content">
                                           <span class="info-box-text">Total Villages</span>
-                                          <span class="info-box-number">366</span>
+                                          @php
+                                            $villageCount = \App\Models\Village::count();
+                                          @endphp
+                                          <span class="info-box-number">{{ $villageCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
                                   </div>
