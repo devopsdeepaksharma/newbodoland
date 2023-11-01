@@ -1,8 +1,3 @@
-{{--Hi {{ $user->name }},
-You have assigned to project: {{ $project->title }}  --}}
-
-<!-- Dear {{ $user->name }}, -->
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
   <head>
@@ -79,8 +74,9 @@ You have assigned to project: {{ $project->title }}  --}}
                                       </tbody>
                                     </table>
                                     <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">
-                                    Your project details have been approved by the State Project Management Unit (SPMU). Kindly login to see the status.
+                                        Dear {{ $user->name }}, We have received your Project details for <b>{{ $project->title }}</b>. We will get back to you soon.
                                     </p>
+                                    <p>Regards, MIS Team</p>
                                     <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                       <tbody>
                                         <tr>
@@ -154,4 +150,4 @@ You have assigned to project: {{ $project->title }}  --}}
       </tbody>
     </table>
   </body>
-</html>
+</html> 

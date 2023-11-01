@@ -42,31 +42,25 @@
                   </thead>
                   <tbody>
                   
-                  @foreach($getSmpuProjectDetails as $gccpd)
+                  @foreach($csoProjectDetails as $data)
      
                   <tr>
                     <td>1</td>
-                    <td>{{$gccpd->title}}</td>
-                    <td>{{$gccpd->location}}</td>
-                    <td>{{$gccpd->duration}} Months</td>
-                    <td style="width:50%">{{$gccpd->description}}</td>
-                   
+                    <td>{{$data->title}}</td>
+                    <td>{{$data->location}}</td>
+                    <td>{{$data->duration}} Years</td>
+                    <td style="width:50%">{{$data->description}}</td>
                     <td>
-                      
-                    
-                     
-                     @if($gccpd->cso_create_project_status == 1)
-                     
+                     @if($data->cso_create_project_status == 1)
                         <div class="btn-group w-100">
                         <span class="btn btn-info">
                         <span>Pending for SMPU Approval</span>
                       </span>
                       </div>
                       @else
-                      <a href="{{ route('cso.createprojectdetail', ['pro_id' => $gccpd->project_id, 'user_id' => $gccpd->user_id])}}">
+                      <a href="{{ route('cso.createprojectdetail', ['pro_id' => $data->project_id, 'user_id' => $data->user_id])}}">
                         <div class="btn-group w-100">
                         <span class="btn btn-warning col fileinput-button dz-clickable">
-                          
                         <span>Create Project</span></span>
                       </div>
                       </a>
@@ -74,10 +68,7 @@
                     </td>
                   </tr>
                   @endforeach
-                  
-                  
                   </tbody>
-                 
                 </table>
               </div>
               <!-- /.card-body -->

@@ -1,4 +1,9 @@
 @extends('adminlayouts.app')
+
+@section('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
+
 @section('content')
 
 <section class="content-header">
@@ -23,12 +28,11 @@
         <form  method="POST" action="{{ route('cso.storeprojectdetail') }}" enctype='multipart/form-data'>
             @csrf  
         <div class="row">
-            <input type="text" name="project_id" value="{{$pro_id}}" >
-            <input type="text" name="user_id" value="{{$user_id}}" >
+            <input type="hidden" name="project_id" value="{{$pro_id}}" >
             <div class="col-12">
                 <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Create Project Detail</h3>
+                    <h3 class="card-title">Fill Project Detail</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -40,7 +44,7 @@
                                     <label for="state">Select State : <span style="color:red;"> * </span></label>
                                     <select class="form-control @error('state') is-invalid @enderror" name="state" id="state" >
                                     <option value="">Select State </option>
-                                    <option value="assam">Assam</option>
+                                    
                                     </select>
                                     @if ($errors->has('state'))
                                           <span class="text-danger errorsize">{{ $errors->first('state') }}</span>
@@ -49,8 +53,21 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label for="district">Select District : <span style="color:red;"> * </span></label>
+                                    <select class="form-control @error('district') is-invalid @enderror" name="district" id="district" onchange="return getBlocks(this)">
+                                        <option value="">Select District </option>
+                                    </select>
+                                    @if ($errors->has('district'))
+                                          <span class="text-danger errorsize">{{ $errors->first('district') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
                                     <label for="block">Enter Block Name : <span style="color:red;"> * </span></label>
-                                    <input type="text" class="form-control @error('block') is-invalid @enderror" name="block" id="block" value="{{ old('block') }}"  placeholder="Block Name">
+                                    <select class="form-control @error('block') is-invalid @enderror" name="block" id="block" onchange="return getVcdcs(this)">
+                                        <option value="">Select Block</option>
+                                    </select>
                                     @if ($errors->has('block'))
                                           <span class="text-danger errorsize">{{ $errors->first('block') }}</span>
                                     @endif
@@ -59,7 +76,9 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="vcdc">Enter VCDC Name : <span style="color:red;"> * </span></label>
-                                    <input type="text" class="form-control @error('vcdc') is-invalid @enderror"name="vcdc" id="vcdc" value="{{ old('vcdc') }}" placeholder="Enter VCDC Name">
+                                    <select class="form-control @error('vcdc') is-invalid @enderror" name="vcdc" id="vcdc" >
+                                        <option value="">Select VCDC</option>
+                                    </select>
                                     @if ($errors->has('vcdc'))
                                           <span class="text-danger errorsize">{{ $errors->first('vcdc') }}</span>
                                     @endif
@@ -165,7 +184,130 @@
         
     <div>
 </section>          
-
-
-
 @endSection
+
+@section('scripts')
+    {{-- script for Select 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            // for select 2 dropdowns
+            $('#state').select2();
+            $('#district').select2();
+            $('#block').select2();
+            $('#vcdc').select2();
+            //load all districts on page load
+            getAllDistricts();
+            getAllStates();
+
+            function getAllDistricts()
+            {
+                $.ajax({
+                url: '/api/getAllDistricts',  // Replace with the actual route in your backend
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Once data is received, populate the dropdown
+                    var dropdown = $('#district');
+                    dropdown.empty(); // Clear existing options
+                    // Add a default option
+                    dropdown.append('<option value="">Select District</option>');
+                    // Add the districts from the AJAX response
+                    $.each(data, function(key, value) {
+                        dropdown.append('<option value="' + value.id + '">' + value.district_name + '</option>');
+                    });
+                },
+                error: function() {
+                    alert("Error while fetching districts");
+                }
+            });
+            }
+
+            function getAllStates()
+            {
+                $.ajax({
+                url: '/api/getAllStates',  // Replace with the actual route in your backend
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Once data is received, populate the dropdown
+                    var dropdown = $('#state');
+                    dropdown.empty(); // Clear existing options
+                    // Add a default option
+                    dropdown.append('<option value="">Select State</option>');
+                    // Add the districts from the AJAX response
+                    $.each(data, function(key, value) {
+                        dropdown.append('<option value="' + value.id + '">' + value.name + '</option>');
+                    });
+                },
+                error: function() {
+                    alert("Error while fetching states");
+                }
+            });
+            }
+        });
+
+
+        function getBlocks(param)
+        {
+            var districtId = param.value;
+            if (districtId) {
+                // Make an AJAX request to fetch blocks for the selected district
+                $.ajax({
+                    url: '/api/getBlocks/' + districtId, // Replace with the actual route in your backend
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        var blocksDropdown = $('#block');
+                        blocksDropdown.empty(); // Clear existing options
+
+                        // Add a default option
+                        blocksDropdown.append('<option value="">Select Block</option>');
+
+                        // Add the blocks from the AJAX response
+                        $.each(data, function(key, value) {
+                            blocksDropdown.append('<option value="' + value.id + '">' + value.block_name + '</option>');
+                        });
+                    },
+                    error: function() {
+                        alert('Error fetching blocks.');
+                    }
+                });
+            } else {
+                // If no district is selected, clear the blocks dropdown
+                $('#block').empty();
+            }
+
+        }
+
+        function getVcdcs(param)
+        {
+            let blockId = param.value;
+            if (blockId) {
+            $.ajax({
+                    url: '/api/getVcdcs/' + blockId, 
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        var vcdcDropdown = $('#vcdc');
+                        vcdcDropdown.empty();
+                        vcdcDropdown.append('<option value="">Select VCDC</option>');
+                        $.each(data, function(key, value) {
+                            vcdcDropdown.append('<option value="' + value.id + '">' + value.vcdc_name + '</option>');
+                        });
+                    },
+                    error: function() {
+                        alert('Error fetching VCDC.');
+                    }
+                });
+            } else {
+                $('#vcdc').empty();
+            }
+        }
+    </script>
+
+@endsection
