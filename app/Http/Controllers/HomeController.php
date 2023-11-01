@@ -63,7 +63,7 @@ class HomeController extends Controller
         elseif($getUserData->registration_complete == 0 && $getUserData->status == 'A')
         {
             
-            dd($user->hasRole('admin'));
+           
             return view('cso.csoregistration', compact('getUserData'));
         }
         elseif($getUserData->registration_complete == 1 && $getUserData->status == 'P')
