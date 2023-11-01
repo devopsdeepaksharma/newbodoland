@@ -48,7 +48,7 @@
                     <td>1</td>
                     <td>{{$gccpd->title}}</td>
                     <td>{{$gccpd->location}}</td>
-                    <td>{{$gccpd->duration}} Months</td>
+                    <td>{{$gccpd->duration}} Years</td>
                     <td style="width:50%">{{$gccpd->description}}</td>
                    
                     <td>

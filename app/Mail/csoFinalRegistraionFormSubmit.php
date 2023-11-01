@@ -36,6 +36,6 @@ class csoFinalRegistraionFormSubmit extends Mailable
     {
         return $this->view('mail.csofinalregistrationformsubmit')
         ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
-        ->subject('Approve CSO Application');
+        ->subject('Status of CSO Application');
     }
 }

@@ -204,7 +204,7 @@ div.desc {
                                       <div class="info-box-content">
                                           <span class="info-box-text">Total Districts</span>
                                           @php
-                                            $districtCount = \App\Models\District::count();
+                                          $districtCount = \App\Models\District::count();
                                           @endphp
                                           <span class="info-box-number">{{ $districtCount }}</span>
                                       </div>
@@ -217,9 +217,9 @@ div.desc {
                                   <div class="info-box shadow-lg">
                                       <span class="info-box-icon bg-success"><i class="	fa fa-cube"></i></span>
                                       <div class="info-box-content">
-                                      @php
-                                            $blockCount = \App\Models\Block::count();
-                                            @endphp
+                                          @php
+                                          $blockCount = \App\Models\Block::count();
+                                          @endphp
                                           <span class="info-box-number">{{ $blockCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
@@ -231,8 +231,8 @@ div.desc {
                                   <div class="info-box shadow-lg">
                                       <span class="info-box-icon bg-warning"><i class="fas fa-dolly-flatbed"></i></span>
                                       <div class="info-box-content">
-                                      @php
-                                            $vcdcCount = \App\Models\VillageCouncilDevelopmentCommittee::count();
+                                          @php
+                                          $vcdcCount = \App\Models\VillageCouncilDevelopmentCommittee::count();
                                           @endphp
                                           <span class="info-box-number">{{ $vcdcCount }}</span>
                                       </div>
@@ -245,8 +245,8 @@ div.desc {
                                   <div class="info-box shadow-lg">
                                       <span class="info-box-icon bg-danger"><i class="fa fa-map-pin"></i></span>
                                       <div class="info-box-content">
-                                      @php
-                                            $villageCount = \App\Models\Village::count();
+                                          @php
+                                          $villageCount = \App\Models\Village::count();
                                           @endphp
                                           <span class="info-box-number">{{ $villageCount }}</span>
                                       </div>
@@ -340,7 +340,51 @@ div.desc {
                               <h4>Implementing Partner</h4>
                           </div>
                           <div class="card-body">
-
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://theant.org/en/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP1.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">The ANT</div>
+                                  </div>
+                              </div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://www.kabilindia.org/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP2.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">KABIL</div>
+                                  </div>
+                              </div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://www.gvmassam.org/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP3.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">Gramya Vikash Mancha (GVM) </div>
+                                  </div>
+                              </div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://www.nerswn.org/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP4.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">North East Research & Social Work Networking (NERSWN)</div>
+                                  </div>
+                              </div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://sesta.org/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP5.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">Seven Sisters Development Assistance (SeSTA)</div>
+                                  </div>
+                              </div>
                           </div>
                       </div>
                   </div>

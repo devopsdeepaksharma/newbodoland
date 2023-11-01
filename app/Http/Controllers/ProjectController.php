@@ -97,35 +97,47 @@ class ProjectController extends Controller
 
     public function assignProject(Request $request)
     {
+        
        $projectId = $request->project_id;
        $userId = $request->user_id;
 
        $check = UserProject::where('user_id', $userId)
                 ->where('project_id', $projectId)
                 ->exists();
-        
+        //dd($check);
         if($check) {
             sweetalert()->addError('Project already Linked!');
             return back();
         } else {
             try {
                 DB::transaction(function () use ($projectId, $userId) {
+                    // Attempt to create UserProject record
                     UserProject::create([
                         'project_id' => $projectId,
                         'user_id' => $userId
                     ]);
-
+            
+                    // Attempt to retrieve User and Project
                     $user = User::find($userId);
                     $project = Project::find($projectId);
-                    Mail::to($user->email)->send(new AssignProjectMail($project, $user));
+            
+                    if ($user && $project) {
+                        // Attempt to send the email
+                        Mail::to($user->email)->send(new AssignProjectMail($project, $user));
+                    } else {
+                        // Handle the case where either User or Project is not found
+                        throw new \Exception('User or Project not found.');
+                    }
                 });
-
+            
                 sweetalert()->addSuccess('Project Linked!');
                 return back();
             } catch (\Throwable $e) {
-                sweetalert()->addError('Exception Occured! Contact Admin');
+                error_log('Error in transaction: ' . $e->getMessage());
+                sweetalert()->addError('Exception Occurred! Contact Admin');
                 return back();
             }
+            
         }
     }
 
