@@ -206,6 +206,7 @@ div.desc {
                                           @php
                                           $districtCount = \App\Models\District::count();
                                           @endphp
+
                                           <span class="info-box-number">{{ $districtCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
@@ -217,9 +218,11 @@ div.desc {
                                   <div class="info-box shadow-lg">
                                       <span class="info-box-icon bg-success"><i class="	fa fa-cube"></i></span>
                                       <div class="info-box-content">
+                                      <span class="info-box-text">Total Block</span>
                                           @php
                                           $blockCount = \App\Models\Block::count();
                                           @endphp
+                                          
                                           <span class="info-box-number">{{ $blockCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
@@ -231,9 +234,11 @@ div.desc {
                                   <div class="info-box shadow-lg">
                                       <span class="info-box-icon bg-warning"><i class="fas fa-dolly-flatbed"></i></span>
                                       <div class="info-box-content">
+                                      <span class="info-box-text">Total VCDC</span>
                                           @php
                                           $vcdcCount = \App\Models\VillageCouncilDevelopmentCommittee::count();
                                           @endphp
+                                          
                                           <span class="info-box-number">{{ $vcdcCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
@@ -245,8 +250,12 @@ div.desc {
                                   <div class="info-box shadow-lg">
                                       <span class="info-box-icon bg-danger"><i class="fa fa-map-pin"></i></span>
                                       <div class="info-box-content">
-                                          <span class="info-box-text">Total Villages</span>
-                                          <span class="info-box-number">366</span>
+                                      <span class="info-box-text">Total Villages</span>
+                                          @php
+                                          $villageCount = \App\Models\Village::count();
+                                          @endphp
+                                         
+                                          <span class="info-box-number">{{ $villageCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
                                   </div>
@@ -358,9 +367,9 @@ div.desc {
                               </div>
                               <div class="responsive">
                                   <div class="gallery">
+                                  
                                       <a target="_blank" href="https://www.gvmassam.org/">
-                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP3.png')}}"
-                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      <img src="{{ asset('storage/assets/ImplementingPartner/IP3.png') }}" style="width:100%; height:134px;" alt="" title="">
                                       </a>
                                       <div class="desc">Gramya Vikash Mancha (GVM) </div>
                                   </div>
