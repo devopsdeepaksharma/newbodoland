@@ -171,16 +171,17 @@ class UserController extends Controller
     public function changeStatus(Request $request)
     {
         try {
-            DB::transaction(function () use ($request) {
-                $user = User::find($request->userId);
+            $user = User::find($request->userId);
+            DB::transaction(function () use ($user, $request) {
                 $user->status = $request->approval_status;
                 $user->save();
             });
+            
             Mail::to($user->email)->send(new approveApplicationMail($user));
             sweetalert()->addSuccess('Application status changed!');
             return back();
-        } catch(\Exception $e) {
-            sweetalert()->addError('Some error occured!');
+        } catch (\Exception $e) {
+            sweetalert()->addError('Some error occurred!');
             return back();
         }
         

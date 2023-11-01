@@ -4,6 +4,54 @@
 .info-box-number {
     font-size: 20px;
 }
+
+
+div.gallery {
+    border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
   </style>
   @role('CSO')
   @include('admin.csodashboard')
@@ -154,9 +202,9 @@
                                   <div class="info-box shadow-lg">
                                       <span class="info-box-icon bg-info"><i class="fa fa-home"></i></span>
                                       <div class="info-box-content">
-                                          <span class="info-box-text" >Total Districts</span>
+                                          <span class="info-box-text">Total Districts</span>
                                           @php
-                                            $districtCount = \App\Models\District::count();
+                                          $districtCount = \App\Models\District::count();
                                           @endphp
                                           <span class="info-box-number">{{ $districtCount }}</span>
                                       </div>
@@ -169,10 +217,9 @@
                                   <div class="info-box shadow-lg">
                                       <span class="info-box-icon bg-success"><i class="	fa fa-cube"></i></span>
                                       <div class="info-box-content">
-                                          <span class="info-box-text">Total Blocks</span>
-                                            @php
-                                            $blockCount = \App\Models\Block::count();
-                                            @endphp
+                                          @php
+                                          $blockCount = \App\Models\Block::count();
+                                          @endphp
                                           <span class="info-box-number">{{ $blockCount }}</span>
                                       </div>
                                       <!-- /.info-box-content -->
@@ -184,9 +231,8 @@
                                   <div class="info-box shadow-lg">
                                       <span class="info-box-icon bg-warning"><i class="fas fa-dolly-flatbed"></i></span>
                                       <div class="info-box-content">
-                                          <span class="info-box-text">Total VCDC</span>
                                           @php
-                                            $vcdcCount = \App\Models\VillageCouncilDevelopmentCommittee::count();
+                                          $vcdcCount = \App\Models\VillageCouncilDevelopmentCommittee::count();
                                           @endphp
                                           <span class="info-box-number">{{ $vcdcCount }}</span>
                                       </div>
@@ -200,10 +246,7 @@
                                       <span class="info-box-icon bg-danger"><i class="fa fa-map-pin"></i></span>
                                       <div class="info-box-content">
                                           <span class="info-box-text">Total Villages</span>
-                                          @php
-                                            $villageCount = \App\Models\Village::count();
-                                          @endphp
-                                          <span class="info-box-number">{{ $villageCount }}</span>
+                                          <span class="info-box-number">366</span>
                                       </div>
                                       <!-- /.info-box-content -->
                                   </div>
@@ -228,7 +271,7 @@
                   <!-- /.col-md-6 -->
                   <div class="col-md-12 col-lg-6">
                       <div class="card">
-                          <div class="card-header text-white" style="background-color: #6610f2">
+                          <div class="card-header text-white bg-info">
                               <h4>Project Location</h4>
                           </div>
                           <div class="card-body">
@@ -239,14 +282,107 @@
                   <!-- /.col-md-6 -->
               </div>
 
+              <hr>
+              <div style="height:20px; clear:both;"></div>
               <div class="row">
                   <div class="col-md-12 col-lg-12">
                       <div class="card">
-                          <div class="card-header text-white bg-primary">
-                              <h4>bg-primary</h4>
+                          <div class="card-header text-white bg-info">
+                              <h4>Goverment Partner</h4>
                           </div>
                           <div class="card-body">
-                              <div id="map" style="height: 500px; width: 100%;"></div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://bodoland.gov.in/">
+                                          <img src="{{Storage::url('/assets/GovermentPartner/btc-logo.png')}}"
+                                              alt="Cinque Terre" width="600" height="400">
+                                      </a>
+                                      <div class="desc">Bodoland Territorial Region</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- Funding Partners -->
+                  <div class="col-md-12 col-lg-12">
+                      <div class="card">
+                          <div class="card-header text-white bg-info">
+                              <h4>Funding Partner</h4>
+                          </div>
+                          <div class="card-body">
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://azimpremjifoundation.org/">
+                                          <img src="{{Storage::url('/assets/FundingPartner/FP1.png')}}"
+                                              alt="Cinque Terre" width="600" height="400">
+                                      </a>
+                                      <div class="desc">Azim Premji Foundation</div>
+                                  </div>
+                              </div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://bodoland.gov.in/">
+                                          <img src="{{Storage::url('/assets/FundingPartner/FP2.png')}}"
+                                              alt="Cinque Terre" style="width:283px; height:134px;">
+                                      </a>
+                                      <div class="desc">BRLF</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- Implemeting Partner -->
+                  <div class="col-md-12 col-lg-12">
+                      <div class="card">
+                          <div class="card-header text-white bg-info">
+                              <h4>Implementing Partner</h4>
+                          </div>
+                          <div class="card-body">
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://theant.org/en/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP1.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">The ANT</div>
+                                  </div>
+                              </div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://www.kabilindia.org/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP2.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">KABIL</div>
+                                  </div>
+                              </div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://www.gvmassam.org/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP3.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">Gramya Vikash Mancha (GVM) </div>
+                                  </div>
+                              </div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://www.nerswn.org/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP4.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">North East Research & Social Work Networking (NERSWN)</div>
+                                  </div>
+                              </div>
+                              <div class="responsive">
+                                  <div class="gallery">
+                                      <a target="_blank" href="https://sesta.org/">
+                                          <img src="{{Storage::url('/assets/ImplementingPartner/IP5.png')}}"
+                                              alt="Cinque Terre" style="width:100%; height:134px;">
+                                      </a>
+                                      <div class="desc">Seven Sisters Development Assistance (SeSTA)</div>
+                                  </div>
+                              </div>
                           </div>
                       </div>
                   </div>

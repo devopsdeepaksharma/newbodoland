@@ -9,24 +9,23 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-class csoFinalRegistraionFormSubmit extends Mailable
+class CsoProjectDetailMail extends Mailable
 {
     use Queueable, SerializesModels;
-
     public $user;
-  
+    public $project;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(  User $user)
+    public function __construct(User $user, Project $project)
     {
         $this->user = $user;
+        $this->project = $project;
     }
-    
+
     /**
      * Build the message.
      *
@@ -34,8 +33,8 @@ class csoFinalRegistraionFormSubmit extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.csofinalregistrationformsubmit')
+        return $this->view('mail.CsoProjectDetail')
         ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
-        ->subject('Status of CSO Application');
+        ->subject('Project Details Submitted');
     }
 }

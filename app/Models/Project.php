@@ -17,7 +17,7 @@ class Project extends Model
         'description',
         'location',
         'duration',
-        'status'
+        'status',
     ];
 
     /**

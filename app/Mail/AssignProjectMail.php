@@ -37,6 +37,6 @@ class AssignProjectMail extends Mailable
     {
         return $this->view('mail.assignProject')
         ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
-        ->subject('Project Assignment');
+        ->subject('Project Assignment By the State Project Management Unit (SPMU)');
     }
 }

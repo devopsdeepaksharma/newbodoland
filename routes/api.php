@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('getAllDistricts', [AjaxController::class, 'getAllDistricts'])->name('getAllDistricts');
+Route::get('getBlocks/{districtId}', [AjaxController::class, 'getBlocks'])->name('getBlocks');
+Route::get('getVcdcs/{blockId}', [AjaxController::class, 'getVcdcs'])->name('getVcdcs');
+Route::get('getAllStates', [AjaxController::class, 'getAllStates'])->name('getAllStates');
