@@ -14,6 +14,8 @@ use App\Http\Controllers\CsoregistrationController;
 use App\Http\Controllers\CSOProjectController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\CountryStateCityController;
+use App\Http\Controllers\CsoCreateProjectDetailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +67,15 @@ Route::post('cso/storeprojectdetail',[CSOProjectController::class, 'storeproject
 Route::get('/csoregistration',[CsoregistrationController::class, 'index'])->name('csoregistration');
 Route::post('/getcsoregistration',[CsoregistrationController::class, 'store'])->name('getcsoregistration');
 Route::get('/awatingforapproval',[CsoregistrationController::class, 'awatingforapproval'])->name('awatingforapproval');
+
+/**cso create project detail */
+Route::get('cso/createprojectlist',[CsoCreateProjectDetailController::class, 'index'])->name('cso.createprojectlist');
+Route::get('cso/viewprojectlist/{p_id}/{u_id}',[CsoCreateProjectDetailController::class, 'show'])->name('cso.viewprojectlist');
+Route::get('cso/updateprojectlist',[CsoCreateProjectDetailController::class, 'update'])->name('cso.updateprojectlist');
+
+/** state & city */
+Route::post('getcityname', [CsoregistrationController::class, 'getcityname'])->name('getcityname');
+
 
 /**
      * Route for Project module Ashu

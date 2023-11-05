@@ -27,10 +27,13 @@ class CSOProjectController extends Controller
         ->select('p.*','up.user_id', 'up.project_id','up.cso_create_project_status')
         ->where('up.user_id', Auth::user()->id)
         ->get();
+          //dd($csoProjectDetails);
+        $getCsoProjectDetails = CsoProjectDetail::where('user_id',Auth::user()->id)->first();
+        //$getCsoProjectStatus =$getCsoProjectDetails->status;
+
+       //dd($getCsoProjectDetails,Auth::user()->id,$getCsoProjectDetails->status);
         
-        // $getCsoProjectDetails = CsoProjectDetail::where('cso_create_project_status',1)->get();
-        
-        return view('cso.projectlist', compact('csoProjectDetails'));
+        return view('cso.projectlist', compact('csoProjectDetails','getCsoProjectDetails'));
     }
 
 

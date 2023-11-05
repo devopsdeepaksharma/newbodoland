@@ -22,8 +22,12 @@ use App\Models\MajorDonor;
 use App\Models\BudgetInformation;
 use App\Models\AuditReport;
 use App\Models\AnnualReport;
+use App\Models\MyStates;
+use App\Models\MyCities;
+use App\Models\CsoProejctDetail;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Mail\csoFinalRegistraionFormSubmit;
+use Carbon\Carbon;
 
 class CsoregistrationController extends Controller
 {
@@ -31,12 +35,37 @@ class CsoregistrationController extends Controller
 
     public function index(Request $request)
     {
+        $maxDate = date('Y-m-d');
+
+        $minDate = date('Y-m-d', strtotime('-3 year'));
+        //dd($minDate);
+        
         $currentYear = date("Y");
         $lastCurrentYear = $currentYear - 1;
+        $fY = $lastCurrentYear.' - '.$currentYear;
+        
         $secondLastCurrentYear = $lastCurrentYear - 1;
+        $thirdLastCurrentYear = $secondLastCurrentYear - 1;
+        $fY1 = $secondLastCurrentYear.' - '.$lastCurrentYear;
+        $fY2 = $thirdLastCurrentYear.' - '.$secondLastCurrentYear;
+        //dd($fY,$fY1,$fY2);
         $userRegisterEmailId = Auth::user()->email;
         $userPanNumabr = Auth::user()->pan;
-        return view('cso.csoregistrationform', compact(['userRegisterEmailId','userPanNumabr', 'currentYear', 'lastCurrentYear', 'secondLastCurrentYear']));
+        $myStates = MyStates::orderBy('name', 'asc')->get();
+        //dd($myStates);
+       
+        
+
+        
+        return view('cso.csoregistrationform', compact(['userRegisterEmailId','userPanNumabr', 'currentYear', 'lastCurrentYear', 'secondLastCurrentYear','fY','fY1','fY2','myStates','maxDate','minDate']));
+    }
+
+    public function getcityname(Request $request)
+    {
+        
+        $data['cities'] = MyCities::where("state_id",$request->state_id)
+                    ->get(["city","state_id"]);
+        return response()->json($data);
     }
 
     
@@ -57,9 +86,9 @@ class CsoregistrationController extends Controller
             'modeOfRegistration' => ['required', 'max:50'],
             'dateOfRegistration' => 'required',
             'registrationNumber' => 'required',
-            'registrationCertificate' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'registrationCertificate' => 'required|mimes:pdf|max:5120',
             'taRegistrationNo' => 'required',
-            'taCertificate' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'taCertificate' => 'required|mimes:pdf|max:5120',
             'taRegistrationNo' => 'required',
             'pan' => ['required','max:10', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/'],
             //'darpan' => ['required', 'max:50'],
@@ -67,8 +96,8 @@ class CsoregistrationController extends Controller
             'egNumber' => ['required', 'max:50'],
             'fcra_certificate_exists' => 'required',
             'fcraNumber' => ['required_if:fcra_certificate_exists,==,yes', 'max:50'],
-            'fcraRenewalDate' => 'required_if:fcra_certificate_exists,==,yes',
-            'fcraCertificatefile' => 'required_if:fcra_certificate_exists,==,yes|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            //'fcraRenewalDate' => 'required_if:fcra_certificate_exists,==,yes',
+            'fcraCertificatefile' => 'required_if:fcra_certificate_exists,==,yes|mimes:pdf|max:5120',
             'donor1' => ['required', 'max:50'],
             'donor2' => ['required', 'max:50'],
             'budgetYear1' => ['required', 'max:20'],
@@ -78,17 +107,17 @@ class CsoregistrationController extends Controller
             'budgetYear3' => ['required', 'max:20'],
             'budget3' => ['required', 'max:20'],
             'auditReportYear1' => 'required',
-            'uploadAuditReport1' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'uploadAuditReport1' => 'required|mimes:pdf|max:5120',
             'auditReportYear2' => 'required',
-            'uploadAuditReport2' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'uploadAuditReport2' => 'required|mimes:pdf|max:5120',
             'auditReportYear3' => 'required',
-            'uploadAuditReport3' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'uploadAuditReport3' => 'required|mimes:pdf|max:5120',
             'annualReportYear1' => 'required',
-            'uploadAnnualReport1' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'uploadAnnualReport1' => 'required|mimes:pdf|max:5120',
             'annualReportYear2' => 'required',
-            'uploadAnnualReport2' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'uploadAnnualReport2' => 'required|mimes:pdf|max:5120',
             'annualReportYear3' => 'required',
-            'uploadAnnualReport3' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'uploadAnnualReport3' => 'required|mimes:pdf|max:5120',
         ], [
             'headOfOrganisation.required' => 'Head of Organization name is required',
             'organisationName.required' => 'Organization name is required',

@@ -4,15 +4,22 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>BRLF | Partners Profile Details</title>
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <!-- Font Awesome -->
       <link rel="stylesheet" href="{{asset('admin-assets/plugins/fontawesome-free/css/all.min.css')}}">
       <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('admin-assets/css/adminlte.min.css')}}">
       <link href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+      <script src="{{ asset('admin-assets/plugins/jquery/jquery.min.js')}}"></script>
+      <script src="{{ asset('admin-assets/js/myjs.js')}}"></script>
      
       <style>
          .errorsize{
             font-size:12px;
+         }
+
+         .card-header{
+            padding: 0.25rem;
          }
          
       </style>
@@ -23,7 +30,7 @@
          <!-- Navbar -->
          <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
-               <a href="#" class="navbar-brand">
+               <a href="https://bodoland.gov.in/" class="navbar-brand">
                <img src="{{asset('admin-assets/img/logo/logo1.png')}}" alt="AdminLTE Logo"  style="width:40%; height:auto;">
                </a>
                <ol class="breadcrumb float-sm-right">
@@ -42,6 +49,12 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                <div class="container">
+               <div style="height:10px; clear:both;"></div>
+    <center>
+      <h2>"Transforming Lives and Livelihoods in Bodoland"</h2>
+      <small style="font-weight:bold;">30 June 2022 to 30 June 2026</small>
+   </center>
+   <div style="height:10px; clear:both;"></div>
                   <div class="row mb-2">
                      <div class="col-sm-6">
                         <h6 class="m-0"> <i class="fa fa-user"></i> Welcome, {{ Auth::user()->name }} </h6>
@@ -132,11 +145,13 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="state">State <span style="color: red;">*</span> :  </label>
-                                       {{--<input type="text" class="form-control form-control-sm @error('state') is-invalid @enderror" id="state" name="state" placeholder="State" value="{{ old('state') }}">--}}
-                                       <select name="state" id="state" class="form-control form-control-sm @error('state') is-invalid @enderror">
-                                       <option value="">Select State</option>
-                                          @foreach (\App\Models\State::all() as $item)
-                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                         
+                                          <select class="form-control form-control-sm @error('state') is-invalid @enderror" name="state" id="state">
+                                          <option value="">Select State</option>
+                                          @foreach ($myStates as $state) 
+                                          <option value="{{$state->id}}">
+                                          {{$state->name}}
+                                          </option>
                                           @endforeach
                                           </select>
                                        @if ($errors->has('state'))
@@ -148,7 +163,12 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="city">City <span style="color: red;">*</span> :  </label>
-                                       <input type="text" class="form-control form-control-sm @error('city') is-invalid @enderror" id="city" name="city" placeholder="City" value="{{ old('city') }}">
+                                       
+                                       
+                                    
+                                       <select class="form-control form-control-sm @error('city') is-invalid @enderror" id="city" name="city">
+                                          <option>Select City</option>
+                                       </select>
                                        @if ($errors->has('city'))
                                           <span class="text-danger errorsize">{{ $errors->first('city') }}</span>
                                        @endif
@@ -190,7 +210,9 @@
                                        {{--<input type="text" class="form-control form-control-sm @error('modeOfRegistration') is-invalid @enderror" id="modeOfRegistration" name="modeOfRegistration" placeholder="Mode of Registration" value="{{ old('modeOfRegistration') }}"> --}}
                                        <select class="form-control form-control-sm @error('modeOfRegistration') is-invalid @enderror" name="modeOfRegistration" id="modeOfRegistration"  >
                                           <option value=" ">Select Mode of Registartion</option>
-                                          <option value="online" {{ old('modeOfRegistration') === 'online' ? 'selected' : '' }}>Online</option>
+                                          <option value="society" {{ old('modeOfRegistration') === 'society' ? 'selected' : '' }}>Society</option>
+                                          <option value="trust" {{ old('modeOfRegistration') === 'trust' ? 'selected' : '' }}>Trust</option>
+                                          <option value="section-8-Company" {{ old('modeOfRegistration') === 'section-8-Company' ? 'selected' : '' }}>Section-8 Company</option>
                                           
                                        </select>
                                        
@@ -202,7 +224,7 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="dateOfRegistration">Date of Registration <span style="color: red;">*</span> : </label>
-                                       <input type="date" class="form-control form-control-sm @error('dateOfRegistration') is-invalid @enderror" id="dateOfRegistration" name="dateOfRegistration" placeholder="Date of Registration" value="{{ old('dateOfRegistration') }}">
+                                       <input type="date" class="form-control form-control-sm @error('dateOfRegistration') is-invalid @enderror" id="dateOfRegistration" name="dateOfRegistration" placeholder="Date of Registration" value="{{ old('dateOfRegistration') }}" min="{{$minDate}}" max="{{$maxDate}}">
                                        @if ($errors->has('dateOfRegistration'))
                                           <span class="text-danger errorsize">{{ $errors->first('dateOfRegistration') }}</span>
                                        @endif
@@ -246,7 +268,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group">
-                                       <label for="pan">Pan Number <span style="color: red;">*</span> :  </label>
+                                       <label for="pan">PAN Number <span style="color: red;">*</span> :  </label>
                                        <input type="text" class="form-control form-control-sm @error('pan') is-invalid @enderror" id="pan" name="pan" placeholder="PAN Number" value="{{ $userPanNumabr }}" readonly>
                                        @if ($errors->has('pan'))
                                           <span class="text-danger errorsize">{{ $errors->first('pan') }}</span>
@@ -269,7 +291,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group">
-                                       <label for="tanNumber">Tan No  :  </label>
+                                       <label for="tanNumber">TAN No  :  </label>
                                        <input type="text" class="form-control form-control-sm @error('tanNumber') is-invalid @enderror" id="tanNumber" name="tanNumber" placeholder="Tan No" value="{{ old('tanNumber') }}">
                                        @if ($errors->has('tanNumber'))
                                           <span class="text-danger errorsize">{{ $errors->first('tanNumber') }}</span>
@@ -278,7 +300,7 @@
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group">
-                                       <label for="egNumber">80 G Number <span style="color: red;">*</span> :  </label>
+                                       <label for="egNumber">80G Number <span style="color: red;">*</span> :  </label>
                                        <input type="text" class="form-control form-control-sm @error('egNumber') is-invalid @enderror" id="egNumber" name="egNumber" placeholder="80 G Number" value="{{ old('egNumber') }}">
                                        @if ($errors->has('egNumber'))
                                           <span class="text-danger errorsize">{{ $errors->first('egNumber') }}</span>
@@ -310,8 +332,8 @@
                                  
                                  <div class="col-md-4" id="FCRA_Renew_Date" style="display:none;">
                                     <div class="form-group">
-                                       <label for="fcraRenewalDate">FCRA Renewal Date <span style="color: red;">*</span> :  </label>
-                                       <input type="date" class="form-control form-control-sm @error('fcraRenewalDate') is-invalid @enderror" id="fcraRenewalDate" name="fcraRenewalDate" placeholder="FCRA Renewal Date" value="{{ old('fcraRenewalDate') }}">
+                                       <label for="fcraRenewalDate">FCRA Renewal Date :  </label>
+                                       <input type="date" class="form-control form-control-sm @error('fcraRenewalDate') is-invalid @enderror" id="fcraRenewalDate" name="fcraRenewalDate" placeholder="FCRA Renewal Date" value="{{ old('fcraRenewalDate') }}" min="{{$minDate}}" max="{{$maxDate}}">
                                        @if ($errors->has('fcraRenewalDate'))
                                           <span class="text-danger errorsize">{{ $errors->first('fcraRenewalDate') }}</span>
                                        @endif
@@ -447,10 +469,10 @@
                               <div class="row">
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budgetYear1">Budget Year 1 <span style="color: red;">*</span> :  </label>
+                                        <label for="budgetYear1">Financial Year {{$fY}} <span style="color: red;">*</span> :  </label>
                                         {{--<input type="text" class="form-control form-control-sm @error('budgetYear1') is-invalid @enderror" id="budgetYear1" name="budgetYear1" value="{{ old('budgetYear1') }}" placeholder="Budget Year 1"> --}}
                                         <select class="form-control form-control-sm @error('budgetYear1') is-invalid @enderror" name="budgetYear1" id="budgetYear1">
-                                          <option value="{{$currentYear}}" {{ old('budgetYear1') === $currentYear ? 'selected' : '' }}>{{$currentYear}}</option>
+                                          <option value="{{$fY}}" {{ old('budgetYear1') === $fY ? 'selected' : '' }}>{{$fY}}</option>
                                           
                                        </select>
                                           @if ($errors->has('budgetYear1'))
@@ -460,8 +482,8 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budget1">Budget 1 <span style="color: red;">*</span> :  </label>
-                                        <input type="text" class="form-control form-control-sm @error('budget1') is-invalid @enderror" id="budget1" name="budget1" placeholder="Budget 1" value="{{ old('budget1') }}">
+                                        <label for="budget1">Budget For Financial Year {{$fY}} <span style="color: red;">*</span> :  </label>
+                                        <input type="text" class="form-control form-control-sm @error('budget1') is-invalid @enderror" id="budget1" name="budget1" placeholder="{{$fY}}" value="{{ old('budget1') }}"  onkeypress="return isNumber(event)" />
                                         @if ($errors->has('budget1'))
                                              <span class="text-danger errorsize">{{ $errors->first('budget1') }}</span>
                                           @endif
@@ -469,10 +491,10 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budgetYear2">Budget Year 2 <span style="color: red;">*</span> :  </label>
+                                        <label for="budgetYear2">Financial Year {{$fY1}} <span style="color: red;">*</span> :  </label>
                                         {{--<input type="text" class="form-control form-control-sm @error('budgetYear2') is-invalid @enderror" id="budgetYear2" name="budgetYear2" value="{{ old('budgetYear2') }}" placeholder="Budget Year 2">--}}
                                         <select class="form-control form-control-sm @error('budgetYear2') is-invalid @enderror" name="budgetYear2" id="budgetYear2">
-                                          <option value="{{$lastCurrentYear}}" {{ old('budgetYear2') === $lastCurrentYear ? 'selected' : '' }}>{{$lastCurrentYear}}</option>
+                                          <option value="{{$fY1}}" {{ old('budgetYear2') === $fY1 ? 'selected' : '' }}>{{$fY1}}</option>
                                           </select>
                                         @if ($errors->has('budgetYear2'))
                                              <span class="text-danger errorsize">{{ $errors->first('budgetYear2') }}</span>
@@ -481,8 +503,8 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budget2">Budget 2 <span style="color: red;">*</span> :  </label>
-                                        <input type="text" class="form-control form-control-sm @error('budget2') is-invalid @enderror" id="budget2" name="budget2" placeholder="Budget 2" value="{{ old('budget2') }}">
+                                        <label for="budget2">Budget For Financial Year {{$fY1}} <span style="color: red;">*</span> :  </label>
+                                        <input type="text" class="form-control form-control-sm @error('budget2') is-invalid @enderror" id="budget2" name="budget2" placeholder="{{$fY1}}" value="{{ old('budget2') }}" onkeypress="return isNumber1(event)" />
                                         @if ($errors->has('budget2'))
                                              <span class="text-danger errorsize">{{ $errors->first('budget2') }}</span>
                                           @endif
@@ -490,10 +512,10 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budgetYear3">Budget Year 3 <span style="color: red;">*</span> :  </label>
+                                        <label for="budgetYear3">Financial Year {{$fY2}} <span style="color: red;">*</span> :  </label>
                                         {{--<input type="text" class="form-control form-control-sm @error('budgetYear3') is-invalid @enderror" id="budgetYear3" name="budgetYear3" value="{{ old('budgetYear3') }}" placeholder="Budget Year 3">--}}
                                         <select class="form-control form-control-sm @error('budgetYear3') is-invalid @enderror" name="budgetYear3" id="budgetYear3">
-                                          <option value="{{$secondLastCurrentYear}}" {{ old('budgetYear3') === $secondLastCurrentYear ? 'selected' : '' }}>{{$secondLastCurrentYear}}</option>
+                                          <option value="{{$fY2}}" {{ old('budgetYear3') === $fY2 ? 'selected' : '' }}>{{$fY2}}</option>
                                           </select>
                                         @if ($errors->has('budgetYear3'))
                                              <span class="text-danger errorsize">{{ $errors->first('budgetYear3') }}</span>
@@ -502,8 +524,8 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="budget3">Budget 3 <span style="color: red;">*</span> :  </label>
-                                        <input type="text" class="form-control form-control-sm @error('budget3') is-invalid @enderror" id="budget3" name="budget3" placeholder="Budget 3" value="{{ old('budget3') }}">
+                                        <label for="budget3">Budget For Financial Year {{$fY2}}<span style="color: red;">*</span> :  </label>
+                                        <input type="text" class="form-control form-control-sm @error('budget3') is-invalid @enderror" id="budget3" name="budget3" placeholder="{{$fY2}}" value="{{ old('budget3') }}" onkeypress="return isNumber2(event)" />
                                         @if ($errors->has('budget3'))
                                              <span class="text-danger errorsize">{{ $errors->first('budget3') }}</span>
                                           @endif
@@ -526,10 +548,10 @@
                               <div class="row">
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="auditReportYear1">Year 1 <span style="color: red;">*</span> :  </label>
+                                        <label for="auditReportYear1">Financial Year {{$fY}} <span style="color: red;">*</span> :  </label>
                                         {{--<input type="text" class="form-control form-control-sm @error('auditReportYear1') is-invalid @enderror" id="auditReportYear1" name="auditReportYear1" value="{{ old('auditReportYear1') }}" placeholder="Donor 1">--}}
                                         <select class="form-control form-control-sm @error('auditReportYear1') is-invalid @enderror" name="auditReportYear1" id="auditReportYear1">
-                                          <option value="{{$currentYear}}" {{ old('auditReportYear1') === $currentYear ? 'selected' : '' }}>{{$currentYear}}</option>
+                                          <option value="{{$fY}}" {{ old('auditReportYear1') === $fY ? 'selected' : '' }}>{{$fY}}</option>
                                           </select>  
                                         @if ($errors->has('auditReportYear1'))
                                              <span class="text-danger errorsize">{{ $errors->first('auditReportYear1') }}</span>
@@ -538,7 +560,7 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="uploadAuditReport">Upload Report 1 <span style="color: red;">*</span> :  </label>
+                                        <label for="uploadAuditReport">Upload Audit Report {{$fY}} <span style="color: red;">*</span> :  </label>
                                         <input type="file" class="form-control form-control-sm @error('uploadAuditReport1') is-invalid @enderror" id="uploadAuditReport1" name="uploadAuditReport1" placeholder="Donor 2">
                                         @if ($errors->has('uploadAuditReport1'))
                                              <span class="text-danger errorsize">{{ $errors->first('uploadAuditReport1') }}</span>
@@ -547,10 +569,10 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="auditReportYear2">Year 2 <span style="color: red;">*</span> :  </label>
+                                        <label for="auditReportYear2">Financial Year {{$fY1}} <span style="color: red;">*</span> :  </label>
                                        {{-- <input type="text" class="form-control form-control-sm @error('auditReportYear2') is-invalid @enderror" id="auditReportYear2" name="auditReportYear2" value="{{ old('auditReportYear2') }}" placeholder="Donor 3">--}}
                                        <select class="form-control form-control-sm @error('auditReportYear2') is-invalid @enderror" name="auditReportYear2" id="auditReportYear2">
-                                          <option value="{{$lastCurrentYear}}" {{ old('auditReportYear2') === $lastCurrentYear ? 'selected' : '' }}>{{$lastCurrentYear}}</option>
+                                          <option value="{{$fY1}}" {{ old('auditReportYear2') === $fY1 ? 'selected' : '' }}>{{$fY1}}</option>
                                           </select>   
                                        @if ($errors->has('auditReportYear2'))
                                              <span class="text-danger errorsize">{{ $errors->first('auditReportYear2') }}</span>
@@ -559,7 +581,7 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="uploadAuditReport2">Upload Report 2 <span style="color: red;">*</span> :  </label>
+                                        <label for="uploadAuditReport2">Upload Audit Report {{$fY1}} <span style="color: red;">*</span> :  </label>
                                         <input type="file" class="form-control form-control-sm @error('uploadAuditReport2') is-invalid @enderror" id="uploadAuditReport2" name="uploadAuditReport2" placeholder="Donor 2">
                                         @if ($errors->has('uploadAuditReport2'))
                                              <span class="text-danger errorsize">{{ $errors->first('uploadAuditReport2') }}</span>
@@ -568,10 +590,10 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="auditReportYear3">Year 3 <span style="color: red;">*</span> :  </label>
+                                        <label for="auditReportYear3">Financial Year {{$fY2}} <span style="color: red;">*</span> :  </label>
                                         {{--<input type="text" class="form-control form-control-sm @error('auditReportYear3') is-invalid @enderror" id="auditReportYear3" name="auditReportYear3" value="{{ old('auditReportYear3') }}" placeholder="Donor 3">--}}
                                         <select class="form-control form-control-sm @error('auditReportYear3') is-invalid @enderror" name="auditReportYear3" id="auditReportYear3">
-                                          <option value="{{$secondLastCurrentYear}}" {{ old('auditReportYear3') === $secondLastCurrentYear ? 'selected' : '' }}>{{$secondLastCurrentYear}}</option>
+                                          <option value="{{$fY2}}" {{ old('auditReportYear3') === $fY2 ? 'selected' : '' }}>{{$fY2}}</option>
                                           </select> 
                                         @if($errors->has('auditReportYear3'))
                                              <span class="text-danger errorsize">{{ $errors->first('auditReportYear3') }}</span>
@@ -580,7 +602,7 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="uploadAuditReport3">Upload Report 3 <span style="color: red;">*</span> :  </label>
+                                        <label for="uploadAuditReport3">Upload Audit Report {{$fY2}} <span style="color: red;">*</span> :  </label>
                                         <input type="file" class="form-control form-control-sm @error('uploadAuditReport3') is-invalid @enderror" id="uploadAuditReport3" name="uploadAuditReport3" placeholder="Donor 2">
                                         @if ($errors->has('uploadAuditReport3'))
                                              <span class="text-danger errorsize">{{ $errors->first('uploadAuditReport3') }}</span>
@@ -604,10 +626,10 @@
                               <div class="row">
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="annualReportYear1">Year 1 <span style="color: red;">*</span> :  </label>
+                                        <label for="annualReportYear1">Financial Year {{$fY}} <span style="color: red;">*</span> :  </label>
                                         {{--<input type="text" class="form-control form-control-sm @error('annualReportYear1') is-invalid @enderror" id="annualReportYear1" name="annualReportYear1" value="{{ old('annualReportYear1') }}" placeholder="Annual Report Year1">--}}
                                         <select class="form-control form-control-sm @error('annualReportYear1') is-invalid @enderror" name="annualReportYear1" id="annualReportYear1">
-                                          <option value="{{$currentYear}}" {{ old('annualReportYear1') === $currentYear ? 'selected' : '' }}>{{$currentYear}}</option>
+                                          <option value="{{$fY}}" {{ old('annualReportYear1') === $fY ? 'selected' : '' }}>{{$fY}}</option>
                                           </select>   
                                         @if($errors->has('annualReportYear1'))
                                              <span class="text-danger errorsize">{{ $errors->first('annualReportYear1') }}</span>
@@ -616,7 +638,7 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="uploadAnnualReport1">Upload Annual Report 1 <span style="color: red;">*</span> :  </label>
+                                        <label for="uploadAnnualReport1">Upload Annual Report {{$fY}} <span style="color: red;">*</span> :  </label>
                                         <input type="file" class="form-control form-control-sm @error('uploadAnnualReport1') is-invalid @enderror" id="uploadAnnualReport1" name="uploadAnnualReport1" placeholder="Upload Annual Report 1">
                                         @if ($errors->has('uploadAnnualReport1'))
                                              <span class="text-danger errorsize">{{ $errors->first('uploadAnnualReport1') }}</span>
@@ -625,10 +647,10 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="annualReportYear2">Year 2 <span style="color: red;">*</span> :  </label>
+                                        <label for="annualReportYear2">Financial Year {{$fY1}} <span style="color: red;">*</span> :  </label>
                                         {{--<input type="text" class="form-control form-control-sm @error('annualReportYear2') is-invalid @enderror" id="annualReportYear2" name="annualReportYear2" value="{{ old('annualReportYear2') }}" placeholder="Annual Report Year2">--}}
                                         <select class="form-control form-control-sm @error('annualReportYear2') is-invalid @enderror" name="annualReportYear2" id="annualReportYear2">
-                                          <option value="{{$lastCurrentYear}}" {{ old('annualReportYear2') === $lastCurrentYear ? 'selected' : '' }}>{{$lastCurrentYear}}</option>
+                                          <option value="{{$fY1}}" {{ old('annualReportYear2') === $fY1 ? 'selected' : '' }}>{{$fY1}}</option>
                                           </select> 
                                         @if($errors->has('annualReportYear2'))
                                              <span class="text-danger errorsize">{{ $errors->first('annualReportYear2') }}</span>
@@ -637,7 +659,7 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="uploadAnnualReport2">Upload Annual Report 2 <span style="color: red;">*</span> :  </label>
+                                        <label for="uploadAnnualReport2">Upload Annual Report {{$fY1}} <span style="color: red;">*</span> :  </label>
                                         <input type="file" class="form-control form-control-sm @error('uploadAnnualReport2') is-invalid @enderror" id="uploadAnnualReport2" name="uploadAnnualReport2" placeholder="Upload Annual Report 2">
                                         @if ($errors->has('uploadAnnualReport2'))
                                              <span class="text-danger errorsize">{{ $errors->first('uploadAnnualReport2') }}</span>
@@ -646,10 +668,10 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="annualReportYear3">Year 3 <span style="color: red;">*</span> :  </label>
+                                        <label for="annualReportYear3">Financial Year {{$fY2}} <span style="color: red;">*</span> :  </label>
                                         {{--<input type="text" class="form-control form-control-sm @error('annualReportYear3') is-invalid @enderror" id="annualReportYear3" name="annualReportYear3" value="{{ old('annualReportYear3') }}" placeholder="Annual Report Year3">--}}
                                         <select class="form-control form-control-sm @error('annualReportYear3') is-invalid @enderror" name="annualReportYear3" id="annualReportYear3">
-                                          <option value="{{$secondLastCurrentYear}}" {{ old('annualReportYear3') === $secondLastCurrentYear ? 'selected' : '' }}>{{$secondLastCurrentYear}}</option>
+                                          <option value="{{$fY2}}" {{ old('annualReportYear3') === $fY2 ? 'selected' : '' }}>{{$fY2}}</option>
                                           </select> 
                                         
                                         @if($errors->has('annualReportYear3'))
@@ -659,7 +681,7 @@
                                 </div>
                                 <div class="col-md-6">
                                       <div class="form-group">
-                                        <label for="uploadAnnualReport3">Upload Annual Report 3 <span style="color: red;">*</span> :  </label>
+                                        <label for="uploadAnnualReport3">Upload Annual Report {{$fY2}}<span style="color: red;">*</span> :  </label>
                                         <input type="file" class="form-control form-control-sm @error('uploadAnnualReport3') is-invalid @enderror" id="uploadAnnualReport3" name="uploadAnnualReport3" placeholder="Upload Annual Report 3">
                                         @if ($errors->has('uploadAnnualReport3'))
                                              <span class="text-danger errorsize">{{ $errors->first('uploadAnnualReport3') }}</span>
@@ -710,8 +732,8 @@
          <strong>Copyright &copy; 2023-2024 <a href="https://www.brlf.in/">BRLF</a>.</strong> All rights reserved.
       </footer>
    </body>
- 
+   
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
    
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </html>

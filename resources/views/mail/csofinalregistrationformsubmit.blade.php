@@ -118,10 +118,7 @@
                               </tbody>
                             </table>
                             <div class="text-muted text-center" style="color: #718096;" align="center">
-                              from Bharat Rural Livelihoods Foundation. <br>
-                              C-32, Second Floor, Ratna Vilas,<br>
-                              Neeti Bagh, New Delhi, <br>
-                              Delhi 110049
+                            <p>Regards, MIS Team</p>
                             </div>
                             <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                               <tbody>

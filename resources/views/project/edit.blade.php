@@ -17,7 +17,11 @@
                     </ol>
                 </div>
             </div>
+            <div class="pull-right">
+            <a class="btn btn-primary" href="{{ route('projects.index') }}"> Back</a>
+        </div>
         </div><!-- /.container-fluid -->
+        
     </section>
 
 
