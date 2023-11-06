@@ -49,7 +49,7 @@
                                     <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $item->title }}</td>
-                                        <td style="width:50%">{{ $item->description }}</td>
+                                        <td style="width:30%">{{ $item->description }}</td>
                                         <td>
                                             @if($item->status == 1)
                                                 <span class="badge badge-success">Active</span>

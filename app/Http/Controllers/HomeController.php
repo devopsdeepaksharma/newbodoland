@@ -13,6 +13,7 @@ use App\Models\MajorDonor;
 use App\Models\BudgetInformation;
 use App\Models\AuditReport;
 use App\Models\AnnualReport;
+use App\Models\CsoProjectDetail;
 
 class HomeController extends Controller
 {
@@ -38,9 +39,13 @@ class HomeController extends Controller
         $getUserId = Auth::User()->id;
         $user = Auth::user();
         $roles = $user->getRoleNames();
-        // dd($roles);
+       // dd($roles,$getUserId);
        
         $getUserData = User::where('id',$getUserId)->first();
+
+      
+        $csoProjectDetailData = CsoProjectDetail::where('user_id',$getUserId)->first();
+        
  
         //check user already registerd or not
         $basicDetailTableCheck = PartnerBasicDetails::where('user_id', $getUserId)->first();
@@ -58,22 +63,22 @@ class HomeController extends Controller
         //die();
         if($getUserData->registration_complete == 0 && $getUserData->status == 'P')
         {
-            return view('cso.csoregistration', compact('getUserData'));
+            return view('cso.csoregistration', compact('getUserData','csoProjectDetailData'));
         }
         elseif($getUserData->registration_complete == 0 && $getUserData->status == 'A')
         {
             
            
-            return view('cso.csoregistration', compact('getUserData'));
+            return view('cso.csoregistration', compact('getUserData','csoProjectDetailData'));
         }
         elseif($getUserData->registration_complete == 1 && $getUserData->status == 'P')
         {
-            return view('cso.afterregistration', compact('getUserData'));
+            return view('cso.afterregistration', compact('getUserData','csoProjectDetailData'));
         }
         elseif($getUserData->registration_complete == 1 && $getUserData->status == 'A')
         {
             
-            return view('admin.dashboard');
+            return view('admin.dashboard', compact('csoProjectDetailData'));
         }
         else
         {

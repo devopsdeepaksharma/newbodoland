@@ -15,7 +15,7 @@
                 <!-- Navbar -->
                 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
-               <a href="#" class="navbar-brand">
+               <a href="https://bodoland.gov.in/" class="navbar-brand">
                <img src="{{asset('admin-assets/img/logo/logo1.png')}}" alt="AdminLTE Logo"  style="width:40%; height:auto;">
                </a>
                <ol class="breadcrumb float-sm-right">
@@ -42,6 +42,13 @@
 
 <div style="height:150px; clear:both;"></div>
 <div class="container">
+<div style="height:10px; clear:both;"></div>
+    <center>
+      <h2>"Transforming Lives and Livelihoods in Bodoland"</h2>
+      <small style="font-weight:bold;">30 June 2022 to 30 June 2026</small>
+   </center>
+   <div style="height:10px; clear:both;"></div>
+   
 <center><h3><i class="far fa-thumbs-up text-success"></i> Hi! <b>{{$getUserData->name}}</b></h3>
 <div style="height:10px; clear:both;"></div>
         

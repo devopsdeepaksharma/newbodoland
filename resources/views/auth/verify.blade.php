@@ -19,7 +19,7 @@
                 <!-- Navbar -->
                 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
-               <a href="#" class="navbar-brand">
+               <a href="https://www.brlf.in/" target="_blank" class="navbar-brand">
                 <img src="{{asset('admin-assets/img/logo/logo1.png')}}" alt="AdminLTE Logo"  style="width:40%; height:auto;">
                </a>
                <form action="{{ route('logout') }}" method="post">
@@ -38,8 +38,14 @@
     <!-- /.content -->
 </div>
 
-<div style="height:100px; clear:both;"></div>
+<div style="height:50px; clear:both;"></div>
 <div class="container">
+<div style="height:10px; clear:both;"></div>
+    <center>
+      <h2>"Transforming Lives and Livelihoods in Bodoland"</h2>
+      <small style="font-weight:bold;">30 June 2022 to 30 June 2026</small>
+   </center>
+   <div style="height:20px; clear:both;"></div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

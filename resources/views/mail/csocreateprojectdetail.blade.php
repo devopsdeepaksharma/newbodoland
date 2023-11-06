@@ -1,5 +1,4 @@
-{{-- Hi {{ $user->name }}, --}}
-@if($user->status == "A")
+@if($status == "A")
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
   <head>
@@ -76,8 +75,7 @@
                                       </tbody>
                                     </table>
                                     <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">
-                                    Congratulations! You have been assigned a project titled "Transforming Lives and Livelihoods in Bodoland" by the State Project Management Unit (SPMU). 
-                                    
+                                     Congrats! Your Project details has been approved for the project <b>{{ $project->title }}.
                                     </p>
                                     <p>Regards, MIS Team</p>
                                     <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
@@ -120,7 +118,7 @@
                               </tbody>
                             </table>
                             <div class="text-muted text-center" style="color: #718096;" align="center">
-                               <p>Regards, MIS Team</p>
+                           
                             </div>
                             <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                               <tbody>
@@ -151,7 +149,7 @@
     </table>
   </body>
 </html> 
-@else 
+@else
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
   <head>
@@ -228,8 +226,7 @@
                                       </tbody>
                                     </table>
                                     <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">
-                                    We are Regrate! You Application have been rejected for the project titled "Transforming Lives and Livelihoods in Bodoland" by the State Project Management Unit (SPMU). 
-                                    
+                                     Soory! Your Project details rejected for the project <b>{{ $project->title }}.
                                     </p>
                                     <p>Regards, MIS Team</p>
                                     <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
@@ -272,10 +269,7 @@
                               </tbody>
                             </table>
                             <div class="text-muted text-center" style="color: #718096;" align="center">
-                              from Bharat Rural Livelihoods Foundation. <br>
-                              C-32, Second Floor, Ratna Vilas,<br>
-                              Neeti Bagh, New Delhi, <br>
-                              Delhi 110049
+                            
                             </div>
                             <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                               <tbody>
@@ -306,10 +300,9 @@
     </table>
   </body>
 </html> 
-@endif   
+@endif
 
 
 
-<!-- Dear {{ $user->name }}, -->
 
 

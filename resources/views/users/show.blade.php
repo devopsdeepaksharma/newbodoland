@@ -265,7 +265,7 @@
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label for="fcra_certificate_exists">Do you have FCRA <span style="color: red;">*</span> : </label>
-                                    <select class="form-control form-control-sm" name="fcra_certificate_exists" id="fcra_certificate_exists" >
+                                    <select class="form-control form-control-sm" name="fcra_certificate_exists" id="fcra_certificate_exists" readonly >
                                        <option value="">Select Option</option>
                                        <option value="yes" {{ isset($registrationDetail) && $registrationDetail->in_fcra == 'yes' ? 'selected' : ''   }}>Yes</option>
                                        <option value="no" {{ isset($registrationDetail) && $registrationDetail->in_fcra == 'no' ? 'selected' : ''}}>No</option>
@@ -278,6 +278,7 @@
                                     <input readonly type="date" class="form-control form-control-sm @error('fcraRenewalDate') is-invalid @enderror" id="fcraRenewalDate" name="fcraRenewalDate" placeholder="FCRA Renewal Date" value="{{ isset($registrationDetail) ? $registrationDetail->fcra_renewal_date : '' }}">
                                  </div>
                               </div>
+                              @if(isset($registrationDetail) && $registrationDetail->fcra_certificate != '')
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label for="fcraCertificatefile">Download FCRA Certificate <span style="color: red;">*</span> :  </label><br>
@@ -287,6 +288,7 @@
                                     
                                  </div>
                               </div>
+                              @endif
                            </div>
                         </div>
                      </div>

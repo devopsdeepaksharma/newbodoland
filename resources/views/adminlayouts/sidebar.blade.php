@@ -46,12 +46,12 @@
         <p>Assigned Project</p>
       </a>
     </li>
-    <li class="nav-item">
+    <!-- /<li class="nav-item">
       <a href="{{route('cso.approvedprojectdetail')}}" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
         <p>Approved Project</p>
       </a>
-    </li>
+    </li> -->
   </ul>
 </li>
 @endrole
@@ -65,13 +65,22 @@
                   <p>Projects</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{route('cso.createprojectlist')}}" class="nav-link {{ Route::is('cso.*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-folder"></i>
+                  <p>Assigned</p>
+              </a>
+            </li>
            <!-- Second -->
            <li class="nav-header">Role & Permission</li>
           
             <li class="nav-item">
               <a href="{{ route('users.index') }}" class="nav-link {{ Route::is('users.*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
-                  <p>Registered CSO List</p>
+                @php
+                  $vcdcCount = \App\Models\User::where('status','=','P')->where('registration_complete','!=',2)->count();
+                @endphp
+                  <p>Registered CSO List</p> <span class="badge badge-info right">{{$vcdcCount}}</span>
               </a>
             </li>
             <li class="nav-item">
