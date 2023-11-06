@@ -18,4 +18,14 @@ class State extends Model
     {
         return $this->hasMany(District::class);
     }
+
+    /**
+     * Get all of the cities for the State
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class);
+    }
 }

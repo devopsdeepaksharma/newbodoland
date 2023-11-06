@@ -10,8 +10,8 @@
       <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('admin-assets/css/adminlte.min.css')}}">
       <link href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
       <script src="{{ asset('admin-assets/plugins/jquery/jquery.min.js')}}"></script>
-      <script src="{{ asset('admin-assets/js/myjs.js')}}"></script>
      
       <style>
          .errorsize{
@@ -108,6 +108,8 @@
                                        @endif
                                     </div>
                                  </div>
+                              </div>   
+                              <div class="row">
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="mobile">Mobile <span style="color: red;">*</span> :  </label>
@@ -132,6 +134,8 @@
                                        @endif
                                     </div>
                                  </div>
+                              </div>
+                              <div class="row">
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="address">Address <span style="color: red;">*</span> :  </label>
@@ -141,31 +145,20 @@
                                        @endif
                                     </div>
                                  </div>
-                                 
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="state">State <span style="color: red;">*</span> :  </label>
-                                         
-                                          <select class="form-control form-control-sm @error('state') is-invalid @enderror" name="state" id="state">
+                                          <select class="form-control form-control-sm @error('state') is-invalid @enderror" name="state" id="state" onchange="return fetchCities(this.value);">
                                           <option value="">Select State</option>
-                                          @foreach ($myStates as $state) 
-                                          <option value="{{$state->id}}">
-                                          {{$state->name}}
-                                          </option>
-                                          @endforeach
+                                          @if ($errors->has('state'))
+                                             <span class="text-danger errorsize">{{ $errors->first('state') }}</span>
+                                          @endif
                                           </select>
-                                       @if ($errors->has('state'))
-                                          <span class="text-danger errorsize">{{ $errors->first('state') }}</span>
-                                       @endif
-                                       
                                     </div>
                                  </div>
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="city">City <span style="color: red;">*</span> :  </label>
-                                       
-                                       
-                                    
                                        <select class="form-control form-control-sm @error('city') is-invalid @enderror" id="city" name="city">
                                           <option>Select City</option>
                                        </select>
@@ -174,6 +167,8 @@
                                        @endif
                                     </div>
                                  </div>
+                              </div>
+                              <div class="row">
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="pincode">Pincode <span style="color: red;">*</span> :  </label>
@@ -708,19 +703,7 @@
          </div>
       </div>
       <div style="height:10px; clear:both;"></div>
-      <script type="text/javascript">
-      function showDiv(select){
-         if(select.value=='yes'){
-            document.getElementById('FCRA_Renew_Date').style.display = "block";
-            document.getElementById('FCRA_Upload_Docx').style.display = "block";
-            document.getElementById('FCRA_Regitration_Number').style.display = "block";
-         } else{
-            document.getElementById('FCRA_Renew_Date').style.display = "none";
-            document.getElementById('FCRA_Upload_Docx').style.display = "none";
-            document.getElementById('FCRA_Regitration_Number').style.display = "none";
-         }
-      } 
-      </script>
+      
       
       <!-- Main Footer -->
       <footer class="main-footer">
@@ -734,6 +717,85 @@
    </body>
    
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-   
+   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+   <script type="text/javascript">
+
+      function showDiv(select){
+         if(select.value=='yes'){
+            document.getElementById('FCRA_Renew_Date').style.display = "block";
+            document.getElementById('FCRA_Upload_Docx').style.display = "block";
+            document.getElementById('FCRA_Regitration_Number').style.display = "block";
+         } else{
+            document.getElementById('FCRA_Renew_Date').style.display = "none";
+            document.getElementById('FCRA_Upload_Docx').style.display = "none";
+            document.getElementById('FCRA_Regitration_Number').style.display = "none";
+         }
+      } 
+
+      </script>
+
+      <script>
+         $(document).ready(function () {
+         
+            $("#state").select2();
+            $("#city").select2();
+            getAllStates();
+         });
+
+         function getAllStates()
+         {
+            $.ajax({
+                url: '/api/getStatesForRegistration',  // Replace with the actual route in your backend
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Once data is received, populate the dropdown
+                    var dropdown = $('#state');
+                    dropdown.empty(); // Clear existing options
+                    // Add a default option
+                    dropdown.append('<option value="">Select State</option>');
+                    // Add the districts from the AJAX response
+                    $.each(data, function(key, value) {
+                        dropdown.append('<option value="' + value.id + '">' + value.name + '</option>');
+                    });
+                },
+                error: function() {
+                    alert("Error while fetching states");
+                }
+            });
+         }
+
+
+         function fetchCities(param)
+         {
+            let stateId = param;
+            if (stateId) {
+                // Make an AJAX request to fetch blocks for the selected district
+                $.ajax({
+                    url: '/api/getCitiesByStateId/' + stateId, // Replace with the actual route in your backend
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        var blocksDropdown = $('#city');
+                        blocksDropdown.empty(); // Clear existing options
+                        // Add a default option
+                        blocksDropdown.append('<option value="">Select city</option>');
+                        // Add the blocks from the AJAX response
+                        $.each(data, function(key, value) {
+                            blocksDropdown.append('<option value="' + value.id + '">' + value.city_name + '</option>');
+                        });
+                    },
+                    error: function() {
+                        alert('Error fetching cities.');
+                    }
+                });
+            } else {
+                // If no district is selected, clear the blocks dropdown
+                $('#city').empty();
+            }
+         }
+
+      </script>
 
 </html>
