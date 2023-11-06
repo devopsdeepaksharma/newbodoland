@@ -47,13 +47,14 @@
       <h2>"Transforming Lives and Livelihoods in Bodoland"</h2>
       <small style="font-weight:bold;">30 June 2022 to 30 June 2026</small>
    </center>
-   <div style="height:10px; clear:both;"></div>
+   <div style="height:20px; clear:both;"></div>
    
 <center><h3><i class="far fa-thumbs-up text-success"></i> Hi! <b>{{$getUserData->name}}</b></h3>
 <div style="height:10px; clear:both;"></div>
         
         <div style="height:10px; clear:both;"></div>
-        <center><p>Your registration has been received, and your account is awaiting approval. Please wait for confirmation.</p></center>
+        
+        <center><p>Thank you for completing the profile. It is currently under review at the State Project Management Unit (SPMU).</p></center>
     </div>
 
       <!-- /.content-wrapper -->

@@ -64,7 +64,7 @@ class CsoregistrationController extends Controller
     {
         
         $data['cities'] = MyCities::where("state_id",$request->state_id)
-                    ->get(["city","state_id"]);
+                    ->get();
         return response()->json($data);
     }
 

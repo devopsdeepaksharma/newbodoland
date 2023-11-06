@@ -159,8 +159,17 @@ div.desc {
                                 <div class="info-box shadow-lg">
                                     <span class="info-box-icon bg-danger"><i class="fa fa-map-pin"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Total Villages</span>
+                                        <span class="info-box-text">Total Villages {{Auth::user()->id}}</span>
+                                        @php
+                                        $user = Auth::user()->id;
+                                        $villageData = \App\Models\CsoProjectDetail::where('user_id','='. $user)->first();
                                         
+                                        @endphp
+                                       
+                                        @if(!is_null($csoProjectDetailData))
+                                        <span class="info-box-number">{{ $csoProjectDetailData->village_count }}</span>
+                                        @endif
+                                      
                                        
                                         
                                     </div>
@@ -173,7 +182,9 @@ div.desc {
                                     <span class="info-box-icon bg-primary"><i class="fas fa-house-user"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Total Household</span>
-                                        
+                                        @if(!is_null($csoProjectDetailData))
+                                        <span class="info-box-number">{{$csoProjectDetailData->household_count}}</span>
+                                        @endif
                                         
                                     </div>
                                     <!-- /.info-box-content -->

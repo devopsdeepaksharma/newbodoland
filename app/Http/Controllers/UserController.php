@@ -21,6 +21,8 @@ use App\Models\AnnualReport;
 use App\Models\UserProject;
 use App\Models\AuditReport;
 use App\Models\User;
+use App\Models\MyStates;
+use App\Models\MyCities;
 use App\Mail\approveApplicationMail;
     
 class UserController extends Controller
@@ -92,7 +94,16 @@ class UserController extends Controller
     public function show($id): View
     {
         $user = User::find($id);
-        //dd($user);
+       
+        $currentYear = date("Y");
+        $lastCurrentYear = $currentYear - 1;
+        $fY = $lastCurrentYear.' - '.$currentYear;
+        
+        $secondLastCurrentYear = $lastCurrentYear - 1;
+        $thirdLastCurrentYear = $secondLastCurrentYear - 1;
+        $fY1 = $secondLastCurrentYear.' - '.$lastCurrentYear;
+        $fY2 = $thirdLastCurrentYear.' - '.$secondLastCurrentYear;
+        
         $annualReport = AnnualReport::where('user_id', $id)->first();
         $auditReport = AuditReport::where('user_id', $id)->first();
         $budgetInformation = BudgetInformation::where('user_id', $id)->first();
@@ -100,7 +111,8 @@ class UserController extends Controller
         $partnerBasicDetails = PartnerBasicDetails::where('user_id', $id)->first();
         $registrationDetail = RegistrationDetail::where('user_id', $id)->first();
         $majorDonor = MajorDonor::where('user_id', $id)->first();
-        return view('users.show',compact('user','majorDonor','registrationDetail','partnerBasicDetails','annualReport','auditReport','budgetInformation','organisationProfile'));
+        ///dd($user,$annualReport,$auditReport,$budgetInformation, $organisationProfile,$partnerBasicDetails,$registrationDetail,$majorDonor);
+        return view('users.show',compact('user','majorDonor','registrationDetail','partnerBasicDetails','annualReport','auditReport','budgetInformation','organisationProfile','fY','fY1','fY2'));
     }
     
     /**

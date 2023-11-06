@@ -76,7 +76,7 @@
                                       </tbody>
                                     </table>
                                     <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">
-                                    Congratulations! You have been assigned a project titled "Transforming Lives and Livelihoods in Bodoland" by the State Project Management Unit (SPMU). 
+                                    Your profile has been approved by the State Project Management Unit (SPMU). Kindly login to fill project details.  
                                     
                                     </p>
                                     <p>Regards, MIS Team</p>
@@ -120,7 +120,7 @@
                               </tbody>
                             </table>
                             <div class="text-muted text-center" style="color: #718096;" align="center">
-                               <p>Regards, MIS Team</p>
+                               <!-- <p>Regards, MIS Team</p> -->
                             </div>
                             <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                               <tbody>

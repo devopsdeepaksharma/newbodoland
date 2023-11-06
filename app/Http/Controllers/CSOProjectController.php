@@ -29,11 +29,18 @@ class CSOProjectController extends Controller
         ->get();
           //dd($csoProjectDetails);
         $getCsoProjectDetails = CsoProjectDetail::where('user_id',Auth::user()->id)->first();
-        //$getCsoProjectStatus =$getCsoProjectDetails->status;
-
-       //dd($getCsoProjectDetails,Auth::user()->id,$getCsoProjectDetails->status);
+        if($getCsoProjectDetails == 'Null' || $getCsoProjectDetails == '')
+        {
+            $getCsoProjectStatus = 0;
+        }
+        else{
+            $getCsoProjectStatus =$getCsoProjectDetails->status;
+        }
         
-        return view('cso.projectlist', compact('csoProjectDetails','getCsoProjectDetails'));
+
+       //dd($getCsoProjectDetails,Auth::user()->id,$getCsoProjectStatus);
+        
+        return view('cso.projectlist', compact('csoProjectDetails','getCsoProjectDetails','getCsoProjectStatus'));
     }
 
 

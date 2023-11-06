@@ -102,7 +102,7 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="keyContactPerson">Key Contact Person <span style="color: red;">*</span> :  </label>
-                                       <input type="text" class="form-control form-control-sm @error('keyContactPerson') is-invalid @enderror" id="keyContactPerson" name="keyContactPerson" placeholder="key Contact Person" value="{{ old('keyContactPerson') }}">
+                                       <input type="text" class="form-control form-control-sm @error('keyContactPerson') is-invalid @enderror" id="keyContactPerson" name="keyContactPerson" placeholder="key Contact Person" value="{{ old('keyContactPerson') }}" maxlength="10">
                                        @if ($errors->has('keyContactPerson'))
                                           <span class="text-danger errorsize">{{ $errors->first('keyContactPerson') }}</span>
                                        @endif
@@ -111,7 +111,7 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="mobile">Mobile <span style="color: red;">*</span> :  </label>
-                                       <input type="text" class="form-control form-control-sm @error('mobile') is-invalid @enderror" id="mobile" name="mobile" placeholder="Mobile" value="{{ old('mobile') }}">
+                                       <input type="text" class="form-control form-control-sm @error('mobile') is-invalid @enderror" id="mobile" name="mobile" placeholder="Mobile" value="{{ old('mobile') }}" maxlength="10">
                                        @if ($errors->has('mobile'))
                                           <span class="text-danger errorsize">{{ $errors->first('mobile') }}</span>
                                        @endif
@@ -145,7 +145,6 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="state">State <span style="color: red;">*</span> :  </label>
-                                         
                                           <select class="form-control form-control-sm @error('state') is-invalid @enderror" name="state" id="state">
                                           <option value="">Select State</option>
                                           @foreach ($myStates as $state) 
@@ -177,7 +176,7 @@
                                  <div class="col-md-4">
                                     <div class="form-group">
                                        <label for="pincode">Pincode <span style="color: red;">*</span> :  </label>
-                                       <input type="text" class="form-control form-control-sm @error('pincode') is-invalid @enderror" id="pincode" name="pincode" placeholder="Pincode" value="{{ old('pincode') }}">
+                                       <input type="text" class="form-control form-control-sm @error('pincode') is-invalid @enderror" id="pincode" name="pincode" placeholder="Pincode" value="{{ old('pincode') }}" maxlength="6">
                                        @if ($errors->has('pincode'))
                                           <span class="text-danger errorsize">{{ $errors->first('pincode') }}</span>
                                        @endif

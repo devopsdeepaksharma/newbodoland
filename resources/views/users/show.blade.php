@@ -1,10 +1,7 @@
 @extends('adminlayouts.app')
 
 
-
-
 @section('content')
-
 <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -151,13 +148,14 @@
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label for="state">State <span style="color: red;">*</span> :  </label>
-                                    <input readonly type="text" class="form-control form-control-sm" id="state" name="state" placeholder="State" value="{{ isset($partnerBasicDetails) ?  \App\Models\State::find($partnerBasicDetails->org_state)->name : '' }}">
+                                    <input readonly type="text" class="form-control form-control-sm" id="state" name="state" placeholder="State" value="{{ isset($partnerBasicDetails) ?  \App\Models\MyStates::find($partnerBasicDetails->org_state)->name : '' }}">
+                                    {{--<input readonly type="text" class="form-control form-control-sm" id="state" name="state" placeholder="State" value="{{ isset($partnerBasicDetails) ?  \App\Models\State::find($partnerBasicDetails->org_state)->name : '' }}">--}}
                                  </div>
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label for="city">City <span style="color: red;">*</span> :  </label>
-                                    <input readonly type="text" class="form-control form-control-sm" id="city" name="city" placeholder="City" value="{{ isset($partnerBasicDetails) ?  $partnerBasicDetails->org_district : '' }}">
+                                    <input readonly type="text" class="form-control form-control-sm" id="city" name="city" placeholder="City" value="{{ isset($partnerBasicDetails) ?  \App\Models\MyCities::find($partnerBasicDetails->org_district)->city : '' }}">
                                  </div>
                               </div>
                               <div class="col-md-4">
@@ -404,37 +402,37 @@
                            <div class="row">
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="budgetYear1">Budget Year 1 <span style="color: red;">*</span> :  </label>
+                                     <label for="budgetYear1">FY {{$fY}} <span style="color: red;">*</span>  </label>
                                      <input readonly type="text" class="form-control form-control-sm" id="budgetYear1" name="budgetYear1" value="{{ isset($budgetInformation) ? $budgetInformation->budget_year1 : '' }}" placeholder="Budget Year 1">
                                     </div>
                              </div>
                              <div class="col-md-6">
                                 <div class="form-group">
-                                     <label for="budget1">Budget 1 <span style="color: red;">*</span> :  </label>
+                                     <label for="budget1">Budget for FY {{$fY}} <span style="color: red;">*</span>   </label>
                                      <input readonly type="text" class="form-control form-control-sm " id="budget1" name="budget1" placeholder="Budget 1" value="{{ isset($budgetInformation) ? $budgetInformation->budget1 : '' }}">
                                 </div>
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="budgetYear2">Budget Year 2 :  </label>
+                                     <label for="budgetYear2">FY {{$fY1}} </label>
                                      <input readonly type="text" class="form-control form-control-sm" id="budgetYear2" name="budgetYear2" value="{{ isset($budgetInformation) ? $budgetInformation->budget_year2 : ''  }}" placeholder="Budget Year 2">
                                    </div>
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="budget2">Budget 2 :  </label>
+                                     <label for="budget2">Budget for FY {{$fY1}}  </label>
                                      <input readonly type="text" class="form-control form-control-sm" id="budget2" name="budget2" placeholder="Budget 2" value="{{ isset($budgetInformation) ? $budgetInformation->budget2 : '' }}">
                                    </div>
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="budgetYear3">Budget Year 3 :  </label>
+                                     <label for="budgetYear3">FY {{$fY2}}  </label>
                                      <input readonly type="text" class="form-control form-control-sm" id="budgetYear3" name="budgetYear3" value="{{ isset($budgetInformation) ? $budgetInformation->budget_year3 : '' }}" placeholder="Budget Year 3">
                                    </div>
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="budget3">Budget 3 :  </label>
+                                     <label for="budget3">Budget for FY {{$fY2}}   </label>
                                      <input readonly type="text" class="form-control form-control-sm" id="budget3" name="budget3" placeholder="Budget 3" value="{{ isset($budgetInformation) ? $budgetInformation->budget3 : '' }}">
                                    </div>
                              </div>
@@ -455,13 +453,13 @@
                            <div class="row">
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="auditReportYear1">Year 1 <span style="color: red;">*</span> :  </label>
+                                     <label for="auditReportYear1">FY {{$fY}}<span style="color: red;">*</span> :  </label>
                                      <input readonly type="text" class="form-control form-control-sm @error('auditReportYear1') is-invalid @enderror" id="auditReportYear1" name="auditReportYear1" value="{{ isset($auditReport) ? $auditReport->audit_year1 : '' }}" placeholder="Donor 1">
                                     </div>
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="uploadAuditReport">Download Report 1 <span style="color: red;">*</span> :  </label><br>
+                                     <label for="uploadAuditReport">Download Report for FY {{$fY}} <span style="color: red;">*</span> :  </label><br>
                                      <a href="{{ route('file.downloadAuditReport1', ['file' => isset($auditReport) ? $auditReport->audit_report1 : '']) }}">
                                     <i class="fa fa-download"></i>
                                     </a> 
@@ -470,13 +468,13 @@
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="auditReportYear2">Year 2 <span style="color: red;">*</span> :  </label>
+                                     <label for="auditReportYear2">FY {{$fY1}} <span style="color: red;">*</span> :  </label>
                                      <input readonly type="text" class="form-control form-control-sm @error('auditReportYear2') is-invalid @enderror" id="auditReportYear2" name="auditReportYear2" value="{{ isset($auditReport) ? $auditReport->audit_year2 : '' }}" placeholder="Donor 2">
                                     </div>
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="uploadAuditReport2">Download Report 2 <span style="color: red;">*</span> :  </label><br>
+                                     <label for="uploadAuditReport2">Download Report for FY {{$fY1}} <span style="color: red;">*</span> :  </label><br>
                                      <a href="{{ route('file.downloadAuditReport2', ['file' => isset($auditReport) ? $auditReport->audit_report2 : '']) }}">
                                     <i class="fa fa-download"></i>
                                     </a> 
@@ -484,7 +482,7 @@
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="auditReportYear3">Year 3 <span style="color: red;">*</span> :  </label>
+                                     <label for="auditReportYear3">FY {{$fY2}} <span style="color: red;">*</span> :  </label>
                                      <input readonly type="text" class="form-control form-control-sm @error('auditReportYear3') is-invalid @enderror" id="auditReportYear3" name="auditReportYear3" value="{{ isset($auditReport) ? $auditReport->audit_year3 : '' }}" placeholder="Donor 3">
                                      @if($errors->has('auditReportYear3'))
                                           <span class="text-danger errorsize">{{ $errors->first('auditReportYear3') }}</span>
@@ -493,7 +491,7 @@
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="uploadAuditReport3">Download Report 3 <span style="color: red;">*</span> :  </label><br>
+                                     <label for="uploadAuditReport3">Download Report for FY {{$fY2}} <span style="color: red;">*</span> :  </label><br>
                                      <a href="{{ route('file.downloadAuditReport3', ['file' => isset($auditReport) ? $auditReport->audit_report3 : '']) }}">
                                     <i class="fa fa-download"></i>
                                     </a>
@@ -516,13 +514,13 @@
                            <div class="row">
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="annualReportYear1">Year 1 <span style="color: red;">*</span> :  </label>
+                                     <label for="annualReportYear1">FY {{$fY}} <span style="color: red;">*</span> :  </label>
                                      <input readonly type="text" class="form-control form-control-sm @error('annualReportYear1') is-invalid @enderror" id="annualReportYear1" name="annualReportYear1" value="{{ isset($annualReport) ? $annualReport->annual_year1 : '' }}" placeholder="Annual Report Year1">
                                     </div>
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="uploadAnnualReport1">Download Annual Report 1 <span style="color: red;">*</span> :  </label><br>
+                                     <label for="uploadAnnualReport1">Download Annual Report for FY {{$fY}} <span style="color: red;">*</span> :  </label><br>
                                      <a href="{{ route('file.downloadAnnualReport1', ['file' => isset($annualReport) ? $annualReport->annual_report1 : '']) }}">
                                     <i class="fa fa-download"></i>
                                     </a>
@@ -530,7 +528,7 @@
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="annualReportYear2">Year 2 <span style="color: red;">*</span> :  </label>
+                                     <label for="annualReportYear2">FY {{$fY1}} <span style="color: red;">*</span> :  </label>
                                      <input readonly type="text" class="form-control form-control-sm @error('annualReportYear2') is-invalid @enderror" id="annualReportYear2" name="annualReportYear2" value="{{ isset($annualReport) ? $annualReport->annual_year2 : '' }}" placeholder="Annual Report Year2">
                                      @if($errors->has('annualReportYear2'))
                                           <span class="text-danger errorsize">{{ $errors->first('annualReportYear2') }}</span>
@@ -539,7 +537,7 @@
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="uploadAnnualReport2">Download Annual Report 2 <span style="color: red;">*</span> :  </label><br> 
+                                     <label for="uploadAnnualReport2">Download Annual Report for FY {{$fY1}}<span style="color: red;">*</span> :  </label><br> 
                                      <a href="{{ route('file.downloadAnnualReport2', ['file' => isset($annualReport) ? $annualReport->annual_report2 : '']) }}">
                                     <i class="fa fa-download"></i>
                                     </a>
@@ -547,7 +545,7 @@
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="annualReportYear3">Year 3 <span style="color: red;">*</span> :  </label> 
+                                     <label for="annualReportYear3">FY {{$fY}} <span style="color: red;">*</span> :  </label> 
                                      <input readonly type="text" class="form-control form-control-sm @error('annualReportYear3') is-invalid @enderror" id="annualReportYear3" name="annualReportYear3" value="{{ isset($annualReport) ? $annualReport->annual_year3 : '' }}" placeholder="Annual Report Year3">
                                      @if($errors->has('annualReportYear3'))
                                           <span class="text-danger errorsize">{{ $errors->first('annualReportYear3') }}</span>
@@ -556,7 +554,7 @@
                              </div>
                              <div class="col-md-6">
                                    <div class="form-group">
-                                     <label for="uploadAnnualReport3">Download Annual Report 3 <span style="color: red;">*</span> :  </label><br>  
+                                     <label for="uploadAnnualReport3">Download Annual Report for FY {{$fY2}} <span style="color: red;">*</span> :  </label><br>  
                                      <a href="{{ route('file.downloadAnnualReport3', ['file' => isset($annualReport) ? $annualReport->annual_report3 : '']) }}">
                                     <i class="fa fa-download"></i>
                                     </a>

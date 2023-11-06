@@ -51,11 +51,15 @@
       <div class="error-page">
         <h2 class="headline text-warning"> </h2>
         <div class="">
-          <h3><i class="fas fa-exclamation-triangle text-warning"></i> Hi! <b>{{$getUserData->name}}</b></h3>
-          <p>
+          {{--<h3><i class="fas fa-exclamation-triangle text-warning"></i> Hi! <b>{{$getUserData->name}}</b></h3> --}}
+          <p>Dear Partner,</p>
+          <p>Thank you for registering with us. Please click on the link button to complete your registration process.<p>
+          <p>If you have any query. Please write to us at Info@brlf.in</p>
+            <center><a href="{{route('csoregistration')}}"><button class="btn btn-success">Activate Account</button></a></center>
+          {{--<p>
             Thanks for your Intrest in Our Organisation. I request to you, 
             Please complete your registration process by <a href="{{route('csoregistration')}}">Click here..</a> or You have any query. Please write to us at help@brlf.com
-          </p>
+          </p>--}}
         </div>
         <!-- /.error-content -->
       </div>
