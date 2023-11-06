@@ -102,14 +102,16 @@
                           <td>
                             @if($user->status == 'P')
                               <label class="badge bg-warning">Pending</label>
+                            @elseif($user->status == 'R')
+                              <label class="badge bg-danger">Rejected</label>
                             @else  
-                              <label class="badge bg-warning">Approved</label>
+                              <label class="badge bg-success">Approved</label>
                             @endif
                           </td>
                           <td>
-                            <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#assignModal{{$key}}" @if($user->registration_complete == 0 || $user->status == 'P') disabled @endif>Assign Project</button>
+                            <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#assignModal{{$key}}" @if($user->registration_complete == 0 || $user->status != 'A') disabled @endif>Assign Project</button>
                             <a href="{{ route('users.show',$user->id) }}" >
-                              <button class="btn btn-info btn-sm" @if($user->registration_complete == 0) disabled @endif><i class="fa fa-eye"></i></button>
+                              <button class="btn btn-info btn-sm" @if($user->registration_complete == 0 || $user->status != 'P') disabled @endif><i class="fa fa-eye"></i></button>
                             </a>
                             <a href="{{ route('users.edit',$user->id) }}">
                               <button class="btn btn-primary btn-sm"@if($user->registration_complete == 0) disabled @endif ><i class="fa fa-edit"></i></button>

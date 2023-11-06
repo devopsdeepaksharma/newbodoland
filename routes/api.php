@@ -23,3 +23,5 @@ Route::get('getAllDistricts', [AjaxController::class, 'getAllDistricts'])->name(
 Route::get('getBlocks/{districtId}', [AjaxController::class, 'getBlocks'])->name('getBlocks');
 Route::get('getVcdcs/{blockId}', [AjaxController::class, 'getVcdcs'])->name('getVcdcs');
 Route::get('getAllStates', [AjaxController::class, 'getAllStates'])->name('getAllStates');
+Route::get('getStatesForRegistration', [AjaxController::class, 'getStatesForRegistration'])->name('getStatesForRegistration');
+Route::get('getCitiesByStateId/{id}', [AjaxController::class, 'getCitiesByStateId'])->name('getCitiesByStateId');

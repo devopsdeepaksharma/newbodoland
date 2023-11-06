@@ -51,13 +51,11 @@ class CsoregistrationController extends Controller
         //dd($fY,$fY1,$fY2);
         $userRegisterEmailId = Auth::user()->email;
         $userPanNumabr = Auth::user()->pan;
-        $myStates = MyStates::orderBy('name', 'asc')->get();
-        //dd($myStates);
        
         
 
         
-        return view('cso.csoregistrationform', compact(['userRegisterEmailId','userPanNumabr', 'currentYear', 'lastCurrentYear', 'secondLastCurrentYear','fY','fY1','fY2','myStates','maxDate','minDate']));
+        return view('cso.csoregistrationform', compact(['userRegisterEmailId','userPanNumabr', 'currentYear', 'lastCurrentYear', 'secondLastCurrentYear','fY','fY1','fY2','maxDate','minDate']));
     }
 
     public function getcityname(Request $request)

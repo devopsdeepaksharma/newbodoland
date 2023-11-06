@@ -157,7 +157,7 @@
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label for="city">City <span style="color: red;">*</span> :  </label>
-                                    <input readonly type="text" class="form-control form-control-sm" id="city" name="city" placeholder="City" value="{{ isset($partnerBasicDetails) ?  $partnerBasicDetails->org_district : '' }}">
+                                    <input readonly type="text" class="form-control form-control-sm" id="city" name="city" placeholder="City" value="{{ isset($partnerBasicDetails) ?  (is_numeric($partnerBasicDetails->org_district) ? \App\Models\City::find($partnerBasicDetails->org_district)->city_name : '') : ''}}">
                                  </div>
                               </div>
                               <div class="col-md-4">

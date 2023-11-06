@@ -146,6 +146,11 @@ class UserController extends Controller
     
         $user = User::find($id);
         $user->update($input);
+
+        if($user->status) {
+            Mail::to($user->email)->send(new approveApplicationMail($user));
+        }
+
         DB::table('model_has_roles')->where('model_id',$id)->delete();
     
         $user->assignRole($request->input('roles'));
