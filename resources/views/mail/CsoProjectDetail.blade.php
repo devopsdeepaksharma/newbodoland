@@ -74,8 +74,10 @@
                                       </tbody>
                                     </table>
                                     <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">
-                                        Dear {{ $user->name }}, We have received your Project details for <b>{{ $project->title }}</b>. We will get back to you soon.
+                                    Dear Partner,
+                                       {{-- Dear {{ $user->name }}, We have received your Project details for <b>{{ $project->title }}</b>. We will get back to you soon.  --}}
                                     </p>
+                                    <p>You have successfully completed the project details and submitted for approval. It is currently under review at the State Project Management Unit (SPMU).</p>
                                     <p>Regards, MIS Team</p>
                                     <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                       <tbody>

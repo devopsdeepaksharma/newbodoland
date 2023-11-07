@@ -79,7 +79,7 @@ You have assigned to project: {{ $project->title }}  --}}
                                       </tbody>
                                     </table>
                                     <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">
-                                    Congratulations! You have been assigned a project titled <strong>"Transforming Lives and Livelihoods in Bodoland"</strong> by the State Project Management Unit (SPMU).
+                                    Your project details have been approved by the State Project Management Unit (SPMU). Kindly login to see the status.  
                                     </p>
                                     <p>Regards, MIS Team</p>
                                     <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
@@ -122,7 +122,7 @@ You have assigned to project: {{ $project->title }}  --}}
                               </tbody>
                             </table>
                             <div class="text-muted text-center" style="color: #718096;" align="center">
-                            <p>Regards, MIS Team</p>
+                            <!-- <p>Regards, MIS Team</p> -->
                             </div>
                             <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                               <tbody>

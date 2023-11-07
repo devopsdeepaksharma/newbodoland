@@ -78,6 +78,7 @@
                                     <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">
                                     Thank you for completing the profile. It is currently under review at the State Project Management Unit (SPMU).
                                     </p>
+                                    <p>Regards, MIS Team</p>
                                     <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                       <tbody>
                                         <tr>
@@ -118,7 +119,7 @@
                               </tbody>
                             </table>
                             <div class="text-muted text-center" style="color: #718096;" align="center">
-                            <p>Regards, MIS Team</p>
+                            
                             </div>
                             <table class="s-6 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                               <tbody>

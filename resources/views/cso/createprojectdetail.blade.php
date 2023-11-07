@@ -309,5 +309,57 @@
             }
         }
     </script>
+    
+    
+<!-- Below code for validation -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the input element
+        var hrInput = document.getElementById('hr');
+        var adminBudgetInput = document.getElementById('adminBudget');
+        var programInput = document.getElementById('program');
+
+        // Attach an input event listener to the input element
+        hrInput.addEventListener('input', function () {
+            var inputValue = hrInput.value;
+            
+            // Use a regular expression to check if the input contains only numeric characters
+            if (/^\d+$/.test(inputValue)) {
+                // Input is valid, do nothing
+            } else {
+                // Input contains non-numeric characters, show an alert
+                alert('Please enter only numeric characters.');
+                hrInput.value = ''; // Clear the input field
+            }
+        });
+        // Attach an input event listener to the input element
+        adminBudgetInput.addEventListener('input', function () {
+            var inputValue = adminBudgetInput.value;
+            
+            // Use a regular expression to check if the input contains only numeric characters
+            if (/^\d+$/.test(inputValue)) {
+                // Input is valid, do nothing
+            } else {
+                // Input contains non-numeric characters, show an alert
+                alert('Please enter only numeric characters.');
+                adminBudgetInput.value = ''; // Clear the input field
+            }
+        });
+        // Attach an input event listener to the input element
+        programInput.addEventListener('input', function () {
+            var inputValue = programInput.value;
+            
+            // Use a regular expression to check if the input contains only numeric characters
+            if (/^\d+$/.test(inputValue)) {
+                // Input is valid, do nothing
+            } else {
+                // Input contains non-numeric characters, show an alert
+                alert('Please enter only numeric characters.');
+                programInput.value = ''; // Clear the input field
+            }
+        });
+    });
+</script>
 
 @endsection

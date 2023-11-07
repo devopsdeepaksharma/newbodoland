@@ -65,6 +65,7 @@ function isNumber2(evt) {
         var donor1 = document.getElementById('donor1');
         var nameInput = document.getElementById('donor2');
         var nameInput = document.getElementById('donor3');
+        var keyContactPerson = document.getElementById('keyContactPerson');
 
         // Attach an input event listener to the input element
         headOfOrganisation.addEventListener('input', function () {
@@ -135,6 +136,21 @@ function isNumber2(evt) {
                 donor3.value = ''; // Clear the input field
             }
         });
+
+        // Attach an input event listener to the input element
+        keyContactPerson.addEventListener('input', function () {
+            var keyContactPersonValue = keyContactPerson.value;
+            
+            // Use a regular expression to check if the input contains only numeric characters
+            if (/^[A-Za-z\s]*$/.test(keyContactPersonValue)) {
+                // Input is valid, do nothing
+            } else {
+                // Input contains non-numeric characters, show an alert
+                alert('Please enter only alphabetic characters.');
+                keyContactPerson.value = ''; // Clear the input field
+            }
+        });
+
     });
 
     
@@ -142,25 +158,12 @@ function isNumber2(evt) {
 
     document.addEventListener('DOMContentLoaded', function () {
         // Get the input element
-        var keyContactPerson = document.getElementById('keyContactPerson');
+       
         var mobile = document.getElementById('mobile');
         var landlineNumber = document.getElementById('landlineNumber');
         var pincode = document.getElementById('pincode');
 
-        // Attach an input event listener to the input element
-        keyContactPerson.addEventListener('input', function () {
-            var keyContactPersonValue = keyContactPerson.value;
-            
-            // Use a regular expression to check if the input contains only numeric characters
-            if (/^\d+$/.test(keyContactPersonValue)) {
-                // Input is valid, do nothing
-            } else {
-                // Input contains non-numeric characters, show an alert
-                alert('Please enter only numeric characters.');
-                keyContactPerson.value = ''; // Clear the input field
-            }
-        });
-
+        
         mobile.addEventListener('input', function () {
             var mobileValue = mobile.value;
             

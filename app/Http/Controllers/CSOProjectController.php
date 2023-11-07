@@ -27,7 +27,7 @@ class CSOProjectController extends Controller
         ->select('p.*','up.user_id', 'up.project_id','up.cso_create_project_status')
         ->where('up.user_id', Auth::user()->id)
         ->get();
-          //dd($csoProjectDetails);
+          
         $getCsoProjectDetails = CsoProjectDetail::where('user_id',Auth::user()->id)->first();
         if($getCsoProjectDetails == 'Null' || $getCsoProjectDetails == '')
         {
@@ -36,7 +36,7 @@ class CSOProjectController extends Controller
         else{
             $getCsoProjectStatus =$getCsoProjectDetails->status;
         }
-        
+        //dd($csoProjectDetails, $getCsoProjectStatus);
 
        //dd($getCsoProjectDetails,Auth::user()->id,$getCsoProjectStatus);
         
